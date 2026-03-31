@@ -1,0 +1,36 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="800" rx="40" fill="#090E1D"/>
+  <rect x="40" y="40" width="1120" height="720" rx="28" fill="#0D152A" stroke="#22304A" stroke-width="2"/>
+  <rect x="40" y="40" width="1120" height="72" rx="28" fill="#101A31"/>
+  <circle cx="92" cy="76" r="10" fill="#46B8FF"/>
+  <circle cx="124" cy="76" r="10" fill="#8B5CF6"/>
+  <circle cx="156" cy="76" r="10" fill="#B47CFF"/>
+  <rect x="96" y="156" width="1008" height="192" rx="30" fill="url(#paint0_linear)"/>
+  <rect x="144" y="208" width="340" height="22" rx="11" fill="#FFFFFF"/>
+  <rect x="144" y="248" width="286" height="14" rx="7" fill="#D6DDFF"/>
+  <rect x="144" y="278" width="236" height="14" rx="7" fill="#D6DDFF"/>
+  <rect x="96" y="388" width="490" height="272" rx="28" fill="#111D35"/>
+  <rect x="620" y="388" width="484" height="128" rx="28" fill="#111D35"/>
+  <rect x="620" y="532" width="484" height="128" rx="28" fill="#111D35"/>
+  <rect x="134" y="430" width="176" height="18" rx="9" fill="#EDF4FF"/>
+  <rect x="134" y="462" width="258" height="12" rx="6" fill="#97A5C2"/>
+  <rect x="134" y="506" width="410" height="100" rx="22" fill="#0D152A"/>
+  <path d="M170 566C214 532 236 538 274 514C316 488 350 492 390 458C432 422 478 438 520 404" stroke="url(#paint1_linear)" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="520" cy="404" r="14" fill="#B47CFF"/>
+  <rect x="658" y="428" width="150" height="16" rx="8" fill="#EDF4FF"/>
+  <rect x="658" y="458" width="210" height="12" rx="6" fill="#97A5C2"/>
+  <rect x="658" y="572" width="150" height="16" rx="8" fill="#EDF4FF"/>
+  <rect x="658" y="602" width="210" height="12" rx="6" fill="#97A5C2"/>
+  <text x="144" y="196" fill="#FFFFFF" font-family="Segoe UI, Arial, sans-serif" font-size="34" font-weight="700">Mixlr Clone</text>
+  <text x="144" y="324" fill="#D6DDFF" font-family="Segoe UI, Arial, sans-serif" font-size="18">Audio broadcasting landing page preview</text>
+  <defs>
+    <linearGradient id="paint0_linear" x1="96" y1="156" x2="1104" y2="348" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#8B5CF6"/>
+      <stop offset="1" stop-color="#46B8FF"/>
+    </linearGradient>
+    <linearGradient id="paint1_linear" x1="170" y1="566" x2="520" y2="404" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#46B8FF"/>
+      <stop offset="1" stop-color="#B47CFF"/>
+    </linearGradient>
+  </defs>
+</svg>
