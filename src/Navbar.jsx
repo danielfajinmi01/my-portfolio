@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import { FaGithub, FaLinkedinIn } from 'react-icons/fa6'
 import { FaUpwork, FaXTwitter } from 'react-icons/fa6'
+import { HiBars3, HiXMark } from 'react-icons/hi2'
 import { fadeInUp, viewport } from './animation.js'
 import { SOCIAL_LINKS } from './siteData.js'
 
@@ -37,6 +38,19 @@ export default function Navbar() {
         animate="show"
         variants={fadeInUp}
       >
+        <div className="mobile-header-links" aria-label="Quick navigation">
+          {NAV_LINKS.map(link => (
+            <a
+              key={link.href}
+              href={link.href}
+              onClick={e => handleNavClick(e, link.href)}
+              className="link nav-link mobile-header-link"
+            >
+              {link.label}
+            </a>
+          ))}
+        </div>
+
         <ul className="nav-links">
           {NAV_LINKS.map(link => (
             <li key={link.href}>
@@ -80,28 +94,29 @@ export default function Navbar() {
           Hire me
         </a>
 
-        <button className="menu-btn" onClick={() => setMenuOpen(v => !v)} aria-label="Open menu">
-          Menu
+        <button
+          className="menu-btn"
+          onClick={() => setMenuOpen(v => !v)}
+          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={menuOpen}
+          aria-controls="mobile-navigation"
+          type="button"
+        >
+          {menuOpen ? <HiXMark aria-hidden="true" /> : <HiBars3 aria-hidden="true" />}
         </button>
       </motion.nav>
 
       {menuOpen && (
         <div className="mobile-nav-wrap">
           <motion.ul
+            id="mobile-navigation"
             className="mobile-nav-list px-4 sm:px-6"
             initial="hidden"
             animate="show"
             variants={fadeInUp}
             viewport={viewport}
           >
-            {NAV_LINKS.map(link => (
-              <li key={link.href}>
-                <a href={link.href} onClick={e => handleNavClick(e, link.href)} className="link nav-link">
-                  {link.label}
-                </a>
-              </li>
-            ))}
-            <li className="flex flex-wrap gap-3 pt-2">
+            <li className="mobile-socials">
               {SOCIAL_LINKS.map(({ key, href, label }) => {
                 const Icon = SOCIAL_ICONS[key]
 
@@ -112,16 +127,20 @@ export default function Navbar() {
                     target="_blank"
                     rel="noreferrer"
                     aria-label={label}
-                    className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[color:var(--border)] bg-white/5 text-[var(--text-muted)] transition duration-300 hover:border-[color:var(--accent)] hover:text-[var(--accent)]"
+                    className="mobile-social-link"
                   >
+                    <span>{label}</span>
                     <Icon className="text-base" />
                   </a>
                 )
               })}
             </li>
-            <li>
+            <li className="mobile-cta-group">
               <a href="#contact" onClick={e => handleNavClick(e, '#contact')} className="hire-link mobile-hire-link">
                 Hire me
+              </a>
+              <a href="#contact" onClick={e => handleNavClick(e, '#contact')} className="contact-link mobile-contact-link">
+                Contact me
               </a>
             </li>
           </motion.ul>

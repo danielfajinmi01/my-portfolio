@@ -17,7 +17,7 @@ const PROJECTS = [
   {
     name: 'Mixlr Clone',
     brief: 'A frontend replica of the Mixlr audio broadcasting site, focusing on layout fidelity and responsiveness.',
-    previewUrl: 'https://danielfajinmi01.github.io/live-coding-mixlr',
+    previewUrl: 'https://live-coding-mixlr-qxdap1i4j-danielfajinmi01s-projects.vercel.app/',
     thumbnailUrl: mixlrPreview,
     stack: ['React', 'Tailwind CSS', 'CSS Grid', 'Flexbox'],
     challenge: "Achieving a pixel-perfect layout that matched the original audio platform's complex grid.",
@@ -53,8 +53,12 @@ export default function Projects() {
               transition={{ duration: 0.55, delay: index * 0.12, ease: [0.22, 1, 0.36, 1] }}
             >
               <div className="absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-[var(--accent)]/80 to-transparent opacity-70" />
-              <motion.div
+              <motion.a
                 className="project-thumbnail"
+                href={project.previewUrl}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={`Open ${project.name} live preview`}
                 initial={{ opacity: 0, y: 18 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.35 }}
@@ -71,7 +75,7 @@ export default function Projects() {
                   <strong>{project.name}</strong>
                   <span>Responsive UI showcase</span>
                 </div>
-              </motion.div>
+              </motion.a>
               <div className="mb-5 inline-flex rounded-full border border-[color:var(--border)] bg-white/5 px-3 py-1 text-[0.72rem] uppercase tracking-[0.18em] text-[var(--accent)]">
                 Featured Project
               </div>
