@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import { fadeInUp, viewport } from './animation.js'
 
 export default function Contact() {
-  const contactEmail = 'danielfainmi19@gmail.com'
+  const contactEmail = 'danielfajinmi19@gmail.com'
   const [status, setStatus] = useState('idle')
 
   const handleSubmit = (event) => {
