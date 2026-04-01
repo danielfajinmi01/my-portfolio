@@ -3,11 +3,24 @@ import { motion } from 'framer-motion'
 import { fadeInUp, viewport } from './animation.js'
 
 export default function Contact() {
+  const contactEmail = 'danielfainmi19@gmail.com'
   const [status, setStatus] = useState('idle')
 
   const handleSubmit = (event) => {
     event.preventDefault()
+
+    const formData = new FormData(event.currentTarget)
+    const name = formData.get('name')?.toString().trim() ?? ''
+    const email = formData.get('email')?.toString().trim() ?? ''
+    const message = formData.get('message')?.toString().trim() ?? ''
+
+    const subject = encodeURIComponent(`Portfolio enquiry from ${name}`)
+    const body = encodeURIComponent(
+      `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`
+    )
+
     setStatus('sent')
+    window.location.href = `mailto:${contactEmail}?subject=${subject}&body=${body}`
     setTimeout(() => setStatus('idle'), 3000)
   }
 
@@ -28,7 +41,7 @@ export default function Contact() {
           <p className="section-copy">
             Share your project scope, timeline and goals. I will reply with a clean implementation approach.
           </p>
-          <p><a className="link" href="danielfainmi19@gamil.com">danielfainmi19@gamil.com</a></p>
+          <p><a className="link" href={`mailto:${contactEmail}`}>{contactEmail}</a></p>
         </div>
 
         <motion.form className="card contact-form border border-[color:var(--border)] bg-white/5 shadow-[0_20px_55px_rgba(0,0,0,0.22)]" onSubmit={handleSubmit} variants={fadeInUp}>
@@ -45,7 +58,7 @@ export default function Contact() {
             <textarea required name="message" rows="4" />
           </label>
           <button className="btn btn-primary" type="submit">
-            {status === 'sent' ? 'Message sent' : 'Send message'}
+            {status === 'sent' ? 'Opening mail app...' : 'Send message'}
           </button>
         </motion.form>
       </div>
