@@ -20,10 +20,6 @@ export default function App() {
       <ParticlesContainer />
       <div className="bg-grid" />
 
-      <a className="skip-link" href="#main-content">
-        Skip to main content
-      </a>
-
       <Navbar />
 
       <main id="main-content">
