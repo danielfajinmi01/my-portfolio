@@ -50,7 +50,7 @@ export default function Projects() {
                   <div className="project-image-inner">
                     <img
                       src={project.image}
-                      alt={`${project.title} Preview`}
+                      alt={`${project.title} Preview - Built by Obaloluwa Kolade Fajinmi`}
                       className="project-img"
                       loading="lazy"
                     />

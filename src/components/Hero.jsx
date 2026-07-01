@@ -179,7 +179,7 @@ export default function Hero() {
                 whileHover={{ scale: 1.05, zIndex: 10 }}
                 title="View Access Bank Clone"
               >
-                <img src={accessBankPreview} alt="Access Bank Clone preview" />
+                <img src={accessBankPreview} alt="Access Bank Clone preview - Built by Obaloluwa Kolade Fajinmi" />
               </motion.a>
 
               <motion.a
@@ -193,7 +193,7 @@ export default function Hero() {
                 whileHover={{ scale: 1.05, zIndex: 10 }}
                 title="View Mixlr Clone"
               >
-                <img src={mixlrPreview} alt="Mixlr Clone preview" />
+                <img src={mixlrPreview} alt="Mixlr Clone preview - Built by Obaloluwa Kolade Fajinmi" />
               </motion.a>
             </div>
 
@@ -205,7 +205,7 @@ export default function Hero() {
             >
               <img
                 src="/obaloluwa fajinmi transperent.png"
-                alt={SITE_DATA.name}
+                alt={`${SITE_DATA.name} - Full Stack Developer Portfolio Photo`}
                 className="profile-transparent"
               />
             </motion.div>
