@@ -10,8 +10,8 @@ export const SITE_DATA = {
   name: "Obaloluwa Kolade Fajinmi",
   nickname: "Obaloluwa",
   initials: "OKF",
-  title: "Full Stack Developer",
-  roles: ["Full Stack Developer", "Backend Engineer", "Frontend Developer", "Problem Solver", "Tech Enthusiast"],
+  title: "Full Stack Software Engineer",
+  roles: ["Full Stack Software Engineer", "Frontend UI Specialist", "Systems Automation Developer", "Problem Solver"],
   email: "danielfajinmi19@gmail.com",
   location: "Lagos, Nigeria",
   bio: "Crafting digital experiences through innovative design and robust development. Passionate about creating solutions that bridge the gap between user needs and business objectives with clean, efficient code. I specialize in building modern web and mobile applications that deliver exceptional user experiences.",
@@ -23,13 +23,30 @@ export const SITE_DATA = {
     upwork: "https://www.upwork.com/freelancers/~0175bbe1f12ba830c4?mp_source=share"
   },
   stats: {
-    yearsExperience: 2,
+    yearsExperience: 6,
     projectsCompleted: 15,
     deployedProjects: 4
   }
 }
 
 export const PROJECTS = [
+  {
+    id: "moovable",
+    title: "Moovable Technology",
+    type: "Web App",
+    status: "deployed",
+    description: "Frontend Implementation for complex redirect state management and secure authentication states.",
+    longDescription: "Architected robust file upload structures and client-side services, ensuring secure payload delivery to backend endpoints. Converted comprehensive Figma designs to responsive web interfaces.",
+    image: accessBankPreview, // using existing asset as placeholder
+    technologies: ["React", "Next.js", "TypeScript", "REST API", "Auth"],
+    features: ["Dynamic user authentication states", "Secure file upload structures", "Figma to Web conversion", "Client-side state management"],
+    github: null,
+    liveUrl: null,
+    featured: true,
+    completionPercentage: 100,
+    role: "Frontend Implementation Lead",
+    duration: "Contract"
+  },
   {
     id: "accessbank",
     title: "Access Bank Clone",
@@ -123,6 +140,19 @@ export const PROJECTS = [
 export const TIMELINE = [
   {
     year: "2024",
+    title: "BA in History and International Studies",
+    description: "Graduated from Ekiti State University, Ado Ekiti, Nigeria, combining analytical research skills with a global perspective.",
+    type: "education",
+    icon: "book",
+    achievements: [
+      "Completed degree program",
+      "Developed strong analytical research skills",
+      "Enhanced written and verbal communication",
+      "Demonstrated ability to manage complex information"
+    ]
+  },
+  {
+    year: "2024",
     title: "Web Development Foundations",
     description: "Began journey in software development focusing on frontend core technologies: HTML5, CSS3, JavaScript, and Git. Focused on mastering structural design, layouts, and responsive styles.",
     type: "education",
@@ -149,6 +179,19 @@ export const TIMELINE = [
   },
   {
     year: "2025",
+    title: "SQI Professional Diploma in Software Engineering",
+    description: "Completed an intensive program at SQI College of ICT focusing on the MERN Stack, Data Structures, Firebase, Tailwind CSS, Bootstrap, Next.js, HTML & CSS.",
+    type: "education",
+    icon: "book",
+    achievements: [
+      "Mastered MERN Stack technologies",
+      "Learned advanced Data Structures",
+      "Integrated Next.js and Firebase",
+      "Developed robust web applications"
+    ]
+  },
+  {
+    year: "2025",
     title: "Backend Integrations & Databases",
     description: "Expanded skills to fullstack engineering by learning Node.js, Express, MongoDB, and Firebase. Implemented robust RESTful APIs, user auth flows, and integrated Firebase services.",
     type: "skill",
@@ -171,6 +214,19 @@ export const TIMELINE = [
       "Designed mobile-first interaction screens",
       "Built local storage sync with SQLite databases",
       "Created customizable theme modules for notes app"
+    ]
+  },
+  {
+    year: "Ongoing",
+    title: "Systems Automation & Data Modeling",
+    description: "Interfaced with complex simulation engines (AVEVA PIPEPHASE) using structured, text-based configuration and algorithmic modeling. Leveraged Python COM automation to rapidly process multi-variable performance metrics.",
+    type: "milestone",
+    icon: "wrench",
+    achievements: [
+      "Python COM automation integration",
+      "Algorithmic modeling with AVEVA PIPEPHASE",
+      "Data parsing and pipeline optimization",
+      "Bypassed manual GUI workflows for speed"
     ]
   },
   {
