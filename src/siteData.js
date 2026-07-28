@@ -1,5 +1,6 @@
 import accessBankPreview from './assets/access-bank-live.png'
 import mixlrPreview from './assets/mixlr-live.png'
+import moovablePreview from './assets/moovable-preview.png'
 
 // We will use standard assets for new projects
 import royalNotePreview from './assets/royal-note-preview.png'
@@ -35,11 +36,11 @@ export const PROJECTS = [
     title: "Moovable Technology",
     type: "Web App",
     status: "deployed",
-    description: "Frontend Implementation for complex redirect state management and secure authentication states.",
-    longDescription: "Architected robust file upload structures and client-side services, ensuring secure payload delivery to backend endpoints. Converted comprehensive Figma designs to responsive web interfaces.",
-    image: accessBankPreview, // using existing asset as placeholder
+    description: "AI logistics operating system & identity layer powering trusted logistics across Africa with real-time operations, verified operators, and fleet management.",
+    longDescription: "Architected robust file upload structures and client-side services, ensuring secure payload delivery to backend endpoints. Converted comprehensive Figma designs to responsive web interfaces for logistics operators, business & enterprises, fleet owners, and individuals.",
+    image: moovablePreview,
     technologies: ["React", "Next.js", "TypeScript", "REST API", "Auth"],
-    features: ["Dynamic user authentication states", "Secure file upload structures", "Figma to Web conversion", "Client-side state management"],
+    features: ["Dynamic user authentication states", "Logistics operator & fleet owner management", "Figma to Web conversion", "Client-side state management"],
     github: null,
     liveUrl: null,
     featured: true,
