@@ -1,4 +1,7 @@
 import React from 'react'
+import { Analytics } from '@vercel/analytics/react'
+import { SpeedInsights } from '@vercel/speed-insights/react'
+
 import Navbar from './components/Navbar.jsx'
 import Hero from './components/Hero.jsx'
 import About from './components/About.jsx'
@@ -15,6 +18,10 @@ import ScrollTopButton from './components/ScrollTopButton.jsx'
 export default function App() {
   return (
     <div className="app-shell">
+      {/* Vercel Web Visitor Analytics & Speed Performance Tracking */}
+      <Analytics />
+      <SpeedInsights />
+
       {/* Global layouts and trackers */}
       <ScrollProgress />
       <ParticlesContainer />

@@ -17,14 +17,16 @@ export default function Contact() {
     event.preventDefault()
 
     const formData = new FormData(event.currentTarget)
-    const name = formData.get('name')?.toString().trim() ?? ''
+    const firstName = formData.get('firstName')?.toString().trim() ?? ''
+    const lastName = formData.get('lastName')?.toString().trim() ?? ''
     const email = formData.get('email')?.toString().trim() ?? ''
     const subjectVal = formData.get('subject')?.toString().trim() ?? ''
     const message = formData.get('message')?.toString().trim() ?? ''
 
-    const subject = encodeURIComponent(subjectVal || `Portfolio enquiry from ${name}`)
+    const fullName = `${firstName} ${lastName}`.trim() || 'Portfolio Visitor'
+    const subject = encodeURIComponent(subjectVal || `Portfolio consultation request from ${fullName}`)
     const body = encodeURIComponent(
-      `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`
+      `Visitor Details:\nFirst Name: ${firstName}\nLast Name: ${lastName}\nEmail: ${email}\n\nProject / Consultation Message:\n${message}`
     )
 
     setStatus('sent')
@@ -52,7 +54,7 @@ export default function Contact() {
           </div>
           <h2 className="section-title text-gradient">Let's Work Together</h2>
           <p className="section-subtitle">
-            Have an open role, freelance contract, or project scope? Let's talk and build something exceptional.
+            Have an open role, freelance contract, or project scope? Fill in your details below to get connected.
           </p>
         </motion.div>
 
@@ -67,7 +69,7 @@ export default function Contact() {
           >
             <h3>Contact Information</h3>
             <p>
-              I'm always excited to collaborate on new challenges. Whether you want to discuss a project, consult on technical layouts, or just say hello, feel free to reach out!
+              I'm always excited to collaborate on new challenges. Whether you want to discuss a project, consult on technical layouts, or talk about remote opportunities, feel free to reach out!
             </p>
 
             <div className="contact-cards">
@@ -122,39 +124,44 @@ export default function Contact() {
           >
             <div className="contact-form-header">
               <h3>Send A Message</h3>
-              <p>Fill out the form below to open your system's email application with the prefilled message details.</p>
+              <p>Enter your contact details below to send your consultation or project inquiry.</p>
             </div>
 
             <form onSubmit={handleSubmit} className="contact-form">
               <div className="form-row">
                 <div className="form-group">
-                  <label htmlFor="name">Your Name</label>
-                  <input type="text" id="name" name="name" required placeholder="e.g. John Doe" />
+                  <label htmlFor="firstName">First Name</label>
+                  <input type="text" id="firstName" name="firstName" required placeholder="e.g. John" />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="email">Your Email</label>
-                  <input type="email" id="email" name="email" required placeholder="e.g. john@example.com" />
+                  <label htmlFor="lastName">Last Name</label>
+                  <input type="text" id="lastName" name="lastName" required placeholder="e.g. Doe" />
                 </div>
               </div>
 
-              <div className="form-group">
+              <div className="form-group" style={{ marginTop: '1rem' }}>
+                <label htmlFor="email">Email Address</label>
+                <input type="email" id="email" name="email" required placeholder="e.g. john@example.com" />
+              </div>
+
+              <div className="form-group" style={{ marginTop: '1rem' }}>
                 <label htmlFor="subject">Subject</label>
-                <input type="text" id="subject" name="subject" required placeholder="e.g. Project Consultation" />
+                <input type="text" id="subject" name="subject" required placeholder="e.g. Remote Contract / Project Inquiry" />
               </div>
 
-              <div className="form-group">
+              <div className="form-group" style={{ marginTop: '1rem' }}>
                 <label htmlFor="message">Message</label>
-                <textarea id="message" name="message" required placeholder="Describe your project goals or inquiries..." />
+                <textarea id="message" name="message" required placeholder="Describe your project goals or contract requirements..." />
               </div>
 
-              <button type="submit" className="submit-btn" disabled={status === 'sent'}>
+              <button type="submit" className="submit-btn" disabled={status === 'sent'} style={{ marginTop: '1.25rem' }}>
                 <FiSend size={18} />
                 <span>{status === 'sent' ? 'Opening Mail Client...' : 'Send Message'}</span>
               </button>
 
               {status === 'sent' && (
                 <div className="form-message success">
-                  <span>Launching your default email client...</span>
+                  <span>Launching your default email client with your details...</span>
                 </div>
               )}
             </form>
