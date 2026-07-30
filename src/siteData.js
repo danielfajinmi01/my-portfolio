@@ -4,6 +4,8 @@ import moovablePreview from './assets/moovable-preview.png'
 
 // We will use standard assets for new projects
 import royalNotePreview from './assets/royal-note-preview.png'
+import royalNotesIcon from './assets/royal-notes-icon.png'
+import royalNotesLogo from './assets/royal-notes-logo.png'
 import royalPayPreview from './assets/royal-pay-preview.png'
 import royalCarePreview from './assets/royal-care-preview.png'
 
@@ -26,7 +28,7 @@ export const SITE_DATA = {
   stats: {
     yearsExperience: 6,
     projectsCompleted: 15,
-    deployedProjects: 4
+    deployedProjects: 5
   }
 }
 
@@ -86,37 +88,40 @@ export const PROJECTS = [
     id: "royalnote",
     title: "Royal Note",
     type: "Mobile App",
-    status: "in-development",
-    statusLabel: "In Development",
+    status: "deployed",
+    statusLabel: "APK Available",
     description: "A customizable React Native notes application designed for capturing, organizing, and styling personal logs. Features markdown editing, custom tags, themes, and robust local search capabilities.",
     longDescription: "Royal Note provides a highly customizable writing and note-taking experience on mobile. Users can categorize their thoughts with tags, apply dynamic visual themes, and store details securely using offline-first SQLite storage.",
     image: royalNotePreview,
+    icon: royalNotesIcon,
+    logo: royalNotesLogo,
+    apkUrl: "/downloads/RoyalNotes.apk",
     technologies: ["React Native", "Expo", "SQLite", "AsyncStorage", "Paper UI"],
     features: ["Markdown text formatting support", "Dynamic UI theme customizations", "Hierarchical tag folder systems", "Full-text offline search logs"],
     github: null,
     liveUrl: null,
     featured: true,
-    completionPercentage: 75,
+    completionPercentage: 100,
     role: "Mobile Developer",
-    duration: "Ongoing"
+    duration: "Completed"
   },
   {
     id: "royalpay",
     title: "Royal Pay",
     type: "Fintech Web App",
-    status: "in-development",
-    statusLabel: "In Development",
+    status: "deployed",
+    statusLabel: "Deployed",
     description: "A modern financial payment web application built with a Firebase Backend-as-a-Service (BaaS). Supports secure transactions, account ledger updates, wallet balances, and user logs.",
     longDescription: "A fintech dashboard build utilizing Firebase for real-time transactional storage and user authentication. Supports wallet deposits, ledger transfers, and dynamic payment link creations.",
     image: royalPayPreview,
     technologies: ["React", "Firebase BaaS", "Firestore DB", "Tailwind CSS", "Cloud Functions"],
     features: ["Real-time transaction wallet ledger", "Secure user login authentication", "Deposit/withdrawal operations", "Interactive financial analytics charts"],
     github: null,
-    liveUrl: null,
+    liveUrl: "https://royal-pay.netlify.app",
     featured: true,
-    completionPercentage: 60,
+    completionPercentage: 100,
     role: "Full Stack Developer",
-    duration: "Ongoing"
+    duration: "Completed"
   },
   {
     id: "royalcare",

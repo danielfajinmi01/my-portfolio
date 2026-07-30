@@ -1,155 +1,214 @@
-import React from 'react'
-import { motion } from 'framer-motion'
-import { FiGithub, FiExternalLink, FiLock, FiTerminal } from 'react-icons/fi'
+import React, { useEffect, useRef } from 'react'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { FiGithub, FiExternalLink, FiLock, FiTerminal, FiDownload } from 'react-icons/fi'
 import { SITE_DATA, PROJECTS } from '../siteData.js'
 
+gsap.registerPlugin(ScrollTrigger)
+
 export default function Projects() {
-  const fadeInUp = {
-    hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
-  }
+  const sectionRef = useRef(null)
+  const stageRef = useRef(null)
+  const cardsRef = useRef([])
+
+  useEffect(() => {
+    const cards = cardsRef.current.filter(Boolean)
+    if (!cards.length || !sectionRef.current) return
+
+    const mm = gsap.matchMedia()
+
+    mm.add('(min-width: 300px)', () => {
+      // 1. Initial State Setup: Card 0 visible, cards 1..N below stage
+      cards.forEach((card, i) => {
+        if (i !== 0) {
+          gsap.set(card, { yPercent: 105, scale: 0.96 })
+        } else {
+          gsap.set(card, { yPercent: 0, scale: 1 })
+        }
+      })
+
+      // 2. Timeline Pinned Scroll
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'center center',
+          end: `+=${cards.length * 750}`,
+          pin: true,
+          scrub: 0.4,
+          anticipatePin: 1
+        }
+      })
+
+      // 3. Sequentially stack cards with zero bottom overflow
+      cards.forEach((card, i) => {
+        if (i === 0) return
+
+        const prevCards = cards.slice(0, i)
+
+        // Incoming card slides up into stage
+        tl.to(card, {
+          yPercent: 0,
+          scale: 1,
+          duration: 1,
+          ease: 'power1.out'
+        })
+
+        // Scale previous cards cleanly without pushing them down
+        prevCards.forEach((prevCard, pIdx) => {
+          const depth = i - pIdx
+          tl.to(
+            prevCard,
+            {
+              scale: Math.max(0.92, 1 - depth * 0.025),
+              y: 0,
+              duration: 1,
+              ease: 'power1.out'
+            },
+            '<'
+          )
+        })
+      })
+    })
+
+    return () => mm.revert()
+  }, [])
 
   return (
-    <section id="projects" className="projects">
+    <section id="projects" className="projects-pin-section" ref={sectionRef}>
       <div className="container">
-        <motion.div
-          className="section-header"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={fadeInUp}
-        >
-          <div className="section-tag">
+        <div className="section-header" style={{ marginBottom: '0.5rem' }}>
+          <div className="section-tag" style={{ marginBottom: '0.35rem', padding: '0.3rem 0.8rem' }}>
             <span>SELECTED WORK</span>
           </div>
-          <h2 className="section-title text-gradient">Featured Projects</h2>
-          <p className="section-subtitle">
-            A selection of web platforms and mobile builds, representing frontend execution, backend state sync, and custom UI design.
+          <h2 className="section-title text-gradient" style={{ marginBottom: '0.25rem', fontSize: 'clamp(1.5rem, 3.2vw, 2.2rem)' }}>Featured Projects</h2>
+          <p className="section-subtitle" style={{ fontSize: '0.875rem' }}>
+            Scroll down to stack through featured web platforms and mobile apps.
           </p>
-        </motion.div>
+        </div>
 
-        <div className="projects-list">
+        {/* Pinned Card Stack Stage (Zero Bottom Overflow) */}
+        <div className="cards-stack-stage" ref={stageRef}>
           {PROJECTS.map((project, index) => {
-            const isDeployed = project.status === 'deployed'
             const statusClass = project.status === 'deployed' ? 'deployed' : 'in-development'
             const projectNumber = String(index + 1).padStart(2, '0')
+            const totalCount = String(PROJECTS.length).padStart(2, '0')
 
             return (
-              <motion.article
+              <div
                 key={project.id}
-                className="project-item"
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-50px" }}
-                variants={fadeInUp}
+                ref={(el) => (cardsRef.current[index] = el)}
+                className="stack-card-item"
+                style={{ zIndex: index + 1 }}
               >
-                <span className="project-number">{projectNumber}</span>
-
-                {/* Left: Project Image */}
-                <div className="project-image-container">
-                  <div className="project-image-inner">
+                <article className="card-inner">
+                  {/* Left Column: Image Box */}
+                  <div className="card-image-box">
                     <img
                       src={project.image}
-                      alt={`${project.title} Preview - Built by Obaloluwa Kolade Fajinmi`}
-                      className="project-img"
-                      loading="lazy"
+                      alt={`${project.title} Preview`}
+                      className={`card-img ${project.type?.toLowerCase().includes('mobile') ? 'mobile' : 'web'}`}
                     />
                   </div>
-                </div>
 
-                {/* Right: Project Information */}
-                <div className="project-info">
-                  <div className="project-meta">
-                    <span className="project-type">{project.type}</span>
-                    <span className={`project-status ${statusClass}`}>
-                      {project.status === 'deployed' ? '• Deployed' : '• In Development'}
-                    </span>
-                  </div>
+                  {/* Right Column: Information & Actions */}
+                  <div className="card-content-box">
+                    <div>
+                      <div className="card-header-meta">
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
+                          <span className="project-type">{project.type}</span>
+                          <span className={`project-status ${statusClass}`}>
+                            {project.status === 'deployed' 
+                              ? (project.statusLabel ? `• ${project.statusLabel}` : '• Deployed')
+                              : '• In Development'
+                            }
+                          </span>
+                        </div>
+                        <span className="card-index-badge">{projectNumber} / {totalCount}</span>
+                      </div>
 
-                  <h3 className="project-title">{project.title}</h3>
-                  
-                  <p className="project-desc">{project.description}</p>
+                      <div className="card-title-row">
+                        {project.icon && (
+                          <img
+                            src={project.icon}
+                            alt=""
+                            className="card-logo-icon"
+                          />
+                        )}
+                        <h3 className="card-title">{project.title}</h3>
+                      </div>
+                      
+                      <p className="card-desc">{project.description}</p>
 
-                  <div className="project-tech-stack">
-                    {project.technologies.map(tech => (
-                      <span key={tech} className="tech-pill">{tech}</span>
-                    ))}
-                  </div>
+                      <div className="card-tech-stack">
+                        {project.technologies.slice(0, 4).map(tech => (
+                          <span key={tech} className="tech-pill">{tech}</span>
+                        ))}
+                      </div>
 
-                  {/* Challenge & Solution details */}
-                  <div className="project-notes" style={{ marginBottom: '2rem' }}>
-                    <h4 style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                      <FiTerminal size={14} />
-                      Scope Details
-                    </h4>
-                    <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: '1.6', margin: '0.4rem 0' }}>
-                      <strong>Execution Role:</strong> {project.role}
-                    </p>
-                    <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: '1.6', margin: '0.4rem 0' }}>
-                      <strong>Key Core Focus:</strong> {project.features[0]}
-                    </p>
-                  </div>
+                      <div className="card-scope-notes">
+                        <p style={{ display: 'flex', alignItems: 'center', gap: '5px', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '0.15rem' }}>
+                          <FiTerminal size={12} /> Scope & Execution Details
+                        </p>
+                        <p><strong>Role:</strong> {project.role}</p>
+                        <p><strong>Core Focus:</strong> {project.features[0]}</p>
+                      </div>
+                    </div>
 
-                  <div className="project-links">
-                    {project.liveUrl ? (
-                      <a
-                        href={project.liveUrl}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="project-link primary"
-                      >
-                        <FiExternalLink size={16} />
-                        Live Demo
-                      </a>
-                    ) : (
-                      <span className="project-link disabled private">
-                        <FiLock size={16} style={{ marginRight: '6px' }} />
-                        Ongoing Build
-                      </span>
-                    )}
+                    <div className="card-links-row">
+                      {project.liveUrl && (
+                        <a
+                          href={project.liveUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="project-link primary"
+                        >
+                          <FiExternalLink size={14} /> Live Demo
+                        </a>
+                      )}
 
-                    {project.github ? (
-                      <a
-                        href={project.github}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="project-link"
-                      >
-                        <FiGithub size={16} />
-                        Repository
-                      </a>
-                    ) : (
-                      project.github === null && (
-                        <span className="project-link disabled">
-                          Code Private
+                      {project.apkUrl && (
+                        <a
+                          href={project.apkUrl}
+                          download="RoyalNotes.apk"
+                          className="project-link primary"
+                          style={{
+                            background: 'linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%)',
+                            color: '#ffffff',
+                            border: 'none',
+                            boxShadow: '0 4px 14px rgba(139, 92, 246, 0.4)'
+                          }}
+                        >
+                          <FiDownload size={14} /> Download APK
+                        </a>
+                      )}
+
+                      {!project.liveUrl && !project.apkUrl && (
+                        <span className="project-link disabled private">
+                          <FiLock size={14} style={{ marginRight: '5px' }} /> Ongoing Build
                         </span>
-                      )
-                    )}
+                      )}
+
+                      {project.github ? (
+                        <a
+                          href={project.github}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="project-link"
+                        >
+                          <FiGithub size={14} /> Repository
+                        </a>
+                      ) : (
+                        project.github === null && (
+                          <span className="project-link disabled">Code Private</span>
+                        )
+                      )}
+                    </div>
                   </div>
-                </div>
-              </motion.article>
+                </article>
+              </div>
             )
           })}
         </div>
-
-        <motion.div
-          className="projects-cta"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeInUp}
-        >
-          <p>Want to see more of my coding work and backend repositories?</p>
-          <a
-            href={SITE_DATA.socialLinks.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn btn-secondary"
-          >
-            <FiGithub size={18} />
-            Explore More on GitHub
-          </a>
-        </motion.div>
       </div>
     </section>
   )
