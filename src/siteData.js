@@ -8,6 +8,7 @@ import royalNotesIcon from './assets/royal-notes-icon.png'
 import royalNotesLogo from './assets/royal-notes-logo.png'
 import royalPayPreview from './assets/royal-pay-preview.png'
 import royalCarePreview from './assets/royal-care-preview.png'
+import igceNetworkPreview from './assets/igce-network-preview.png'
 
 export const SITE_DATA = {
   name: "Obaloluwa Kolade Fajinmi",
@@ -27,12 +28,30 @@ export const SITE_DATA = {
   },
   stats: {
     yearsExperience: 6,
-    projectsCompleted: 15,
-    deployedProjects: 5
+    projectsCompleted: 16,
+    deployedProjects: 6
   }
 }
 
 export const PROJECTS = [
+  {
+    id: "igcenetwork",
+    title: "IGCE Network",
+    type: "Telecommunications Web App",
+    status: "deployed",
+    statusLabel: "Deployed",
+    description: "A modern broadband telecommunications platform for IGCE Network Limited, featuring high-speed internet subscription plans, service coverage maps, and online onboarding.",
+    longDescription: "Architected a responsive corporate web platform for an Internet Service Provider (ISP), featuring dynamic plan calculators, coverage location checks, and seamless user signup workflows.",
+    image: igceNetworkPreview,
+    technologies: ["React", "Tailwind CSS", "REST API", "Framer Motion"],
+    features: ["Broadband subscription plan showcases", "Interactive coverage area lookup", "Figma to Web conversion", "Client signup & account onboarding"],
+    github: null,
+    liveUrl: "https://igecnet.com",
+    featured: true,
+    completionPercentage: 100,
+    role: "Full Stack Developer",
+    duration: "Completed"
+  },
   {
     id: "moovable",
     title: "Moovable Technology",
