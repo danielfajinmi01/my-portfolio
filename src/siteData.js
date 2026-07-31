@@ -27,7 +27,7 @@ export const SITE_DATA = {
     upwork: "https://www.upwork.com/freelancers/~0175bbe1f12ba830c4?mp_source=share"
   },
   stats: {
-    yearsExperience: 6,
+    yearsExperience: 2,
     projectsCompleted: 16,
     deployedProjects: 6
   }
@@ -43,7 +43,7 @@ export const PROJECTS = [
     description: "A modern broadband telecommunications platform for IGCE Network Limited, featuring high-speed internet subscription plans, service coverage maps, and online onboarding.",
     longDescription: "Architected a responsive corporate web platform for an Internet Service Provider (ISP), featuring dynamic plan calculators, coverage location checks, and seamless user signup workflows.",
     image: igceNetworkPreview,
-    technologies: ["React", "Tailwind CSS", "REST API", "Framer Motion"],
+    technologies: ["React", "Tailwind CSS", "REST API", "GSAP"],
     features: ["Broadband subscription plan showcases", "Interactive coverage area lookup", "Figma to Web conversion", "Client signup & account onboarding"],
     github: null,
     liveUrl: "https://igecnet.com",
@@ -110,12 +110,12 @@ export const PROJECTS = [
     status: "deployed",
     statusLabel: "APK Available",
     description: "A customizable React Native notes application designed for capturing, organizing, and styling personal logs. Features markdown editing, custom tags, themes, and robust local search capabilities.",
-    longDescription: "Royal Note provides a highly customizable writing and note-taking experience on mobile. Users can categorize their thoughts with tags, apply dynamic visual themes, and store details securely using offline-first SQLite storage.",
+    longDescription: "Royal Note provides a highly customizable writing and note-taking experience on mobile. Users can categorize their thoughts with tags, apply dynamic visual themes, and store details securely using offline-first storage.",
     image: royalNotePreview,
     icon: royalNotesIcon,
     logo: royalNotesLogo,
     apkUrl: "/downloads/RoyalNotes.apk",
-    technologies: ["React Native", "Expo", "SQLite", "AsyncStorage", "Paper UI"],
+    technologies: ["React Native", "Expo", "AsyncStorage", "Paper UI"],
     features: ["Markdown text formatting support", "Dynamic UI theme customizations", "Hierarchical tag folder systems", "Full-text offline search logs"],
     github: null,
     liveUrl: null,
@@ -151,7 +151,7 @@ export const PROJECTS = [
     description: "An intuitive tracker application designed for women's health and period monitoring. Includes cycle predictions, health tracking logs, symptom logs, and educational resources.",
     longDescription: "Designed to provide a secure and supportive platform for tracking period cycles, forecasting ovulation dates, and keeping personal logs of daily health symptoms.",
     image: royalCarePreview,
-    technologies: ["React", "Tailwind CSS", "LocalForage", "Framer Motion", "Chart.js"],
+    technologies: ["React", "Tailwind CSS", "LocalForage", "Chart.js"],
     features: ["Interactive cycle history calendar", "Ovulation & next period predictor calculations", "Detailed physical symptom logs", "Secure local browser storage encryption"],
     github: null,
     liveUrl: null,
@@ -231,13 +231,13 @@ export const TIMELINE = [
   {
     year: "2026",
     title: "Mobile App Development",
-    description: "Acquired mobile capabilities using React Native and Expo. Developed offline-first capabilities using SQLite and AsyncStorage, implementing note customization layouts in Royal Note.",
+    description: "Acquired mobile capabilities using React Native and Expo. Developed offline-first capabilities using AsyncStorage and local storage, implementing note customization layouts in Royal Note.",
     type: "skill",
     icon: "mobile",
     achievements: [
       "Mastered React Native & Expo frameworks",
       "Designed mobile-first interaction screens",
-      "Built local storage sync with SQLite databases",
+      "Built offline-first local storage sync",
       "Created customizable theme modules for notes app"
     ]
   },
@@ -274,7 +274,7 @@ export const SKILLS_CATEGORIES = [
     icon: "code",
     title: "Frontend Development",
     description: "Crafting beautiful, responsive user interfaces with modern frameworks. Focus on clean layout, accessibility, and high performance.",
-    technologies: ["React", "JavaScript", "Tailwind CSS", "Framer Motion", "Vite", "HTML5/CSS3"],
+    technologies: ["React", "JavaScript", "Tailwind CSS", "GSAP", "Vite", "HTML5/CSS3"],
     highlights: ["Responsive layouts", "Custom hooks & hooks flows", "Pixel-perfect mockups", "DOM accessibility standards"]
   },
   {
@@ -288,14 +288,14 @@ export const SKILLS_CATEGORIES = [
     icon: "smartphone",
     title: "Mobile Development",
     description: "Developing cross-platform mobile apps with React Native. Structuring offline storage modules and clean UX layouts.",
-    technologies: ["React Native", "Expo", "SQLite", "AsyncStorage", "React Navigation"],
-    highlights: ["Cross-platform builds (iOS/Android)", "SQLite offline storages", "Theme customizers", "Native performance layouts"]
+    technologies: ["React Native", "Expo", "AsyncStorage", "React Navigation"],
+    highlights: ["Cross-platform builds (iOS/Android)", "Offline local storage", "Theme customizers", "Native performance layouts"]
   },
   {
     icon: "wrench",
     title: "Workflow & Tools",
     description: "Structuring clean versioning, continuous builds, and workflow automation. Using collaborative code tools.",
-    technologies: ["Git & GitHub", "Postman", "npm/yarn", "Vercel", "Vite Build"],
+    technologies: ["Git & GitHub", "Antigravity IDE", "Postman", "npm/yarn", "Vercel", "Vite Build"],
     highlights: ["Git branches & pull requests", "API testing with Postman", "Deployment pipelines", "Vite configurations"]
   }
 ]

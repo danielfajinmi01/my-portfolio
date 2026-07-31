@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
 import { FiHome, FiUser, FiCode, FiMail, FiDownload, FiChevronDown, FiX, FiMenu } from 'react-icons/fi'
 import { SITE_DATA } from '../siteData.js'
 
@@ -63,12 +62,7 @@ export default function Navbar() {
 
   return (
     <>
-      <motion.nav
-        className={`navbar ${scrolled ? 'scrolled' : ''}`}
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
+      <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
         <div className="navbar-container">
           <a href="#home" className="navbar-logo" onClick={(e) => handleNavClick(e, '#home')}>
             <div className="logo-icon">{SITE_DATA.initials}</div>
@@ -103,26 +97,18 @@ export default function Navbar() {
               <span>Download CV</span>
               <FiChevronDown size={16} className={`dropdown-icon ${cvDropdownOpen ? 'open' : ''}`} />
             </button>
-            <AnimatePresence>
-              {cvDropdownOpen && (
-                <motion.div
-                  className="cv-dropdown-menu"
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <button className="cv-dropdown-item" onClick={() => handleCvDownload('Technical')}>
-                    <span>Technical CV</span>
-                    <span className="cv-description">For developer & tech roles</span>
-                  </button>
-                  <button className="cv-dropdown-item" onClick={() => handleCvDownload('General')}>
-                    <span>General CV</span>
-                    <span className="cv-description">For general opportunities</span>
-                  </button>
-                </motion.div>
-              )}
-            </AnimatePresence>
+            {cvDropdownOpen && (
+              <div className="cv-dropdown-menu open">
+                <button className="cv-dropdown-item" onClick={() => handleCvDownload('Technical')}>
+                  <span>Technical CV</span>
+                  <span className="cv-description">For developer & tech roles</span>
+                </button>
+                <button className="cv-dropdown-item" onClick={() => handleCvDownload('General')}>
+                  <span>General CV</span>
+                  <span className="cv-description">For general opportunities</span>
+                </button>
+              </div>
+            )}
           </div>
 
           <button
@@ -133,32 +119,23 @@ export default function Navbar() {
             {mobileMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
           </button>
         </div>
-      </motion.nav>
+      </nav>
 
       {/* Mobile Menu */}
       <div className={`mobile-menu ${mobileMenuOpen ? 'active' : ''}`}>
         <ul className="mobile-menu-links">
-          {NAV_LINKS.map((link, idx) => {
+          {NAV_LINKS.map((link) => {
             const Icon = link.icon
             return (
-              <motion.li
-                key={link.name}
-                initial={{ opacity: 0, y: 20 }}
-                animate={mobileMenuOpen ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                transition={{ delay: idx * 0.1 }}
-              >
+              <li key={link.name}>
                 <a href={link.href} onClick={(e) => handleNavClick(e, link.href)}>
                   <Icon size={24} style={{ marginRight: '12px', verticalAlign: 'middle' }} />
                   {link.name}
                 </a>
-              </motion.li>
+              </li>
             )
           })}
-          <motion.li
-            initial={{ opacity: 0, y: 20 }}
-            animate={mobileMenuOpen ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ delay: NAV_LINKS.length * 0.1 }}
-          >
+          <li>
             <div className="mobile-cv-menu">
               <button className="mobile-cv-btn" onClick={() => setCvDropdownOpen(!cvDropdownOpen)}>
                 <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
@@ -167,28 +144,20 @@ export default function Navbar() {
                 </span>
                 <FiChevronDown size={18} className={`dropdown-icon ${cvDropdownOpen ? 'open' : ''}`} />
               </button>
-              <AnimatePresence>
-                {cvDropdownOpen && (
-                  <motion.div
-                    className="mobile-cv-dropdown-menu"
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: 'auto' }}
-                    exit={{ opacity: 0, height: 0 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <button className="mobile-cv-dropdown-item" onClick={() => handleCvDownload('Technical')}>
-                      <span>Technical CV</span>
-                      <span className="cv-description">For developer & tech roles</span>
-                    </button>
-                    <button className="mobile-cv-dropdown-item" onClick={() => handleCvDownload('General')}>
-                      <span>General CV</span>
-                      <span className="cv-description">For general opportunities</span>
-                    </button>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+              {cvDropdownOpen && (
+                <div className="mobile-cv-dropdown-menu open">
+                  <button className="mobile-cv-dropdown-item" onClick={() => handleCvDownload('Technical')}>
+                    <span>Technical CV</span>
+                    <span className="cv-description">For developer & tech roles</span>
+                  </button>
+                  <button className="mobile-cv-dropdown-item" onClick={() => handleCvDownload('General')}>
+                    <span>General CV</span>
+                    <span className="cv-description">For general opportunities</span>
+                  </button>
+                </div>
+              )}
             </div>
-          </motion.li>
+          </li>
         </ul>
       </div>
     </>

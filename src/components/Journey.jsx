@@ -1,5 +1,4 @@
-import React from 'react'
-import { motion } from 'framer-motion'
+import React, { useEffect, useRef } from 'react'
 import { FiBookOpen, FiCode, FiServer, FiSmartphone, FiMonitor, FiCheck } from 'react-icons/fi'
 import { FaRocket } from 'react-icons/fa'
 import { TIMELINE } from '../siteData.js'
@@ -14,21 +13,38 @@ const ICON_MAP = {
 }
 
 export default function Journey() {
-  const fadeInUp = {
-    hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
-  }
+  const journeyRef = useRef(null)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible')
+          } else {
+            // Reverse animation when user scrolls backwards (-Y) out of viewport
+            entry.target.classList.remove('visible')
+          }
+        })
+      },
+      {
+        threshold: 0.15,
+        rootMargin: '0px 0px -40px 0px'
+      }
+    )
+
+    if (journeyRef.current) {
+      const elements = journeyRef.current.querySelectorAll('.reveal-on-scroll')
+      elements.forEach((el) => observer.observe(el))
+    }
+
+    return () => observer.disconnect()
+  }, [])
 
   return (
-    <section id="journey" className="journey" style={{ background: 'var(--bg-primary)' }}>
+    <section id="journey" className="journey" ref={journeyRef} style={{ background: 'var(--bg-primary)' }}>
       <div className="container">
-        <motion.div
-          className="section-header"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={fadeInUp}
-        >
+        <div className="section-header reveal-on-scroll">
           <div className="section-tag">
             <span>MY PATH</span>
           </div>
@@ -36,16 +52,10 @@ export default function Journey() {
           <p className="section-subtitle">
             A chronological look at my progress, technical integrations, and key engineering milestones.
           </p>
-        </motion.div>
+        </div>
 
         {/* Stats Bar */}
-        <motion.div
-          className="journey-stats-bar"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeInUp}
-        >
+        <div className="journey-stats-bar reveal-on-scroll">
           <div className="journey-stat-item">
             <span className="journey-stat-value">2024</span>
             <span className="journey-stat-label">Journey Started</span>
@@ -60,7 +70,7 @@ export default function Journey() {
             <span className="journey-stat-value">Active</span>
             <span className="journey-stat-label">Status: Freelancing</span>
           </div>
-        </motion.div>
+        </div>
 
         {/* Vertical Timeline */}
         <div className="journey-timeline">
@@ -75,16 +85,10 @@ export default function Journey() {
             const isCompleted = item.year !== 'Ongoing'
 
             return (
-              <motion.div
+              <div
                 key={index}
-                className={`timeline-item ${alignmentClass} ${isCompleted ? 'completed' : ''}`}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-100px" }}
-                variants={{
-                  hidden: { opacity: 0, x: isLeft ? -50 : 50 },
-                  visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } }
-                }}
+                className={`timeline-item ${alignmentClass} ${isCompleted ? 'completed' : ''} reveal-on-scroll`}
+                data-index={index}
               >
                 <div className="timeline-dot">
                   <div className="timeline-dot-inner">
@@ -117,7 +121,7 @@ export default function Journey() {
                     ))}
                   </ul>
                 </div>
-              </motion.div>
+              </div>
             )
           })}
         </div>

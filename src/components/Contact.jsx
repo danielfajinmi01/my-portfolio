@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { motion } from 'framer-motion'
 import { FiMail, FiMapPin, FiGithub, FiLinkedin, FiTwitter, FiBriefcase, FiSend } from 'react-icons/fi'
 import { SITE_DATA } from '../siteData.js'
 
@@ -34,21 +33,10 @@ export default function Contact() {
     setTimeout(() => setStatus('idle'), 3000)
   }
 
-  const fadeInUp = {
-    hidden: { opacity: 0, y: 40 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
-  }
-
   return (
     <section id="contact" className="contact">
       <div className="container">
-        <motion.div
-          className="section-header"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={fadeInUp}
-        >
+        <div className="section-header">
           <div className="section-tag">
             <span>GET IN TOUCH</span>
           </div>
@@ -56,17 +44,11 @@ export default function Contact() {
           <p className="section-subtitle">
             Have an open role, freelance contract, or project scope? Fill in your details below to get connected.
           </p>
-        </motion.div>
+        </div>
 
         <div className="contact-grid">
           {/* Left Column: Contact Cards & Socials */}
-          <motion.div
-            className="contact-info"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-50px" }}
-            variants={fadeInUp}
-          >
+          <div className="contact-info">
             <h3>Contact Information</h3>
             <p>
               I'm always excited to collaborate on new challenges. Whether you want to discuss a project, consult on technical layouts, or talk about remote opportunities, feel free to reach out!
@@ -112,16 +94,10 @@ export default function Contact() {
                 )
               })}
             </div>
-          </motion.div>
+          </div>
 
           {/* Right Column: Contact Form */}
-          <motion.div
-            className="contact-form-container"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-50px" }}
-            variants={fadeInUp}
-          >
+          <div className="contact-form-container">
             <div className="contact-form-header">
               <h3>Send A Message</h3>
               <p>Enter your contact details below to send your consultation or project inquiry.</p>
@@ -165,7 +141,7 @@ export default function Contact() {
                 </div>
               )}
             </form>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

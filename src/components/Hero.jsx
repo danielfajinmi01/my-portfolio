@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
 import { FiCode, FiMail, FiGithub, FiLayout, FiServer } from 'react-icons/fi'
 import { SITE_DATA } from '../siteData.js'
 import accessBankPreview from '../assets/access-bank-live.png'
@@ -64,26 +63,6 @@ export default function Hero() {
     return () => clearTimeout(timer)
   }, [typedRole, isDeleting, roleIndex])
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.3
-      }
-    }
-  }
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: "easeOut" }
-    }
-  }
-
   const floatingCards = [
     { icon: FiLayout, title: "UI/UX", desc: "Design" },
     { icon: FiCode, title: "Frontend", desc: "Development" },
@@ -94,30 +73,25 @@ export default function Hero() {
     <section id="home" className="hero">
       <div className="container">
         <div className="hero-container">
-          <motion.div
-            className="hero-content"
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-          >
-            <motion.div className="hero-badge" variants={itemVariants}>
+          <div className="hero-content">
+            <div className="hero-badge">
               <div className="badge-dot" />
               <span>{SITE_DATA.tagline}</span>
-            </motion.div>
+            </div>
 
-            <motion.p className="hero-greeting" variants={itemVariants}>Hi, I'm</motion.p>
-            <motion.h1 className="hero-name" variants={itemVariants}>{SITE_DATA.name}</motion.h1>
+            <p className="hero-greeting">Hi, I'm</p>
+            <h1 className="hero-name">{SITE_DATA.name}</h1>
 
-            <motion.div className="hero-title-wrapper" variants={itemVariants}>
+            <div className="hero-title-wrapper">
               <span className="hero-title">{typedRole}</span>
               <span className="cursor-blink" />
-            </motion.div>
+            </div>
 
-            <motion.p className="hero-description" variants={itemVariants}>
+            <p className="hero-description">
               {SITE_DATA.bio}
-            </motion.p>
+            </p>
 
-            <motion.div className="hero-buttons" variants={itemVariants}>
+            <div className="hero-buttons">
               <a href="#projects" className="btn btn-primary">
                 <FiCode size={18} />
                 View My Work
@@ -135,9 +109,9 @@ export default function Hero() {
                 <FiGithub size={18} />
                 GitHub
               </a>
-            </motion.div>
+            </div>
 
-            <motion.div className="hero-stats" variants={itemVariants}>
+            <div className="hero-stats">
               <div className="stat-item">
                 <div className="stat-number">
                   <CountUp target={SITE_DATA.stats.yearsExperience} />
@@ -158,79 +132,50 @@ export default function Hero() {
                 </div>
                 <p className="stat-label">Deployed Projects</p>
               </div>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
 
-          <motion.div
-            className="hero-profile"
-            initial={{ opacity: 0, scale: 0.85 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-          >
+          <div className="hero-profile">
             <div className="project-showcase">
-              <motion.a
+              <a
                 href="https://access-bank-frontend-project.vercel.app"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="project-screenshot project-1"
-                initial={{ opacity: 0, x: 50, rotate: 5 }}
-                animate={{ opacity: 1, x: 0, rotate: 8 }}
-                transition={{ duration: 0.8, delay: 0.8 }}
-                whileHover={{ scale: 1.05, zIndex: 10 }}
                 title="View Access Bank Clone"
               >
                 <img src={accessBankPreview} alt="Access Bank Clone preview - Built by Obaloluwa Kolade Fajinmi" />
-              </motion.a>
+              </a>
 
-              <motion.a
+              <a
                 href="https://live-coding-mixlr-qxdap1i4j-danielfajinmi01s-projects.vercel.app/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="project-screenshot project-2"
-                initial={{ opacity: 0, x: 80, rotate: -5 }}
-                animate={{ opacity: 1, x: 0, rotate: -5 }}
-                transition={{ duration: 0.8, delay: 1.0 }}
-                whileHover={{ scale: 1.05, zIndex: 10 }}
                 title="View Mixlr Clone"
               >
                 <img src={mixlrPreview} alt="Mixlr Clone preview - Built by Obaloluwa Kolade Fajinmi" />
-              </motion.a>
+              </a>
             </div>
 
-            <motion.div
-              className="profile-transparent-wrapper"
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-            >
+            <div className="profile-transparent-wrapper">
               <img
                 src="/obaloluwa fajinmi transperent.png"
                 alt={`${SITE_DATA.name} - Full Stack Developer Portfolio Photo`}
                 className="profile-transparent"
               />
-            </motion.div>
+            </div>
 
-            <motion.div
-              className="profile-name-badge"
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 1.2 }}
-            >
+            <div className="profile-name-badge">
               <h3>{SITE_DATA.nickname}</h3>
               <p>{SITE_DATA.title}</p>
-            </motion.div>
+            </div>
 
             <div className="floating-cards">
               {floatingCards.map((card, idx) => {
                 const Icon = card.icon
                 return (
-                  <motion.div
-                    key={idx}
-                    className="floating-card"
-                    initial={{ opacity: 0, scale: 0 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 1.3 + idx * 0.2, duration: 0.5 }}
-                  >
+                  <div key={idx} className="floating-card">
                     <div className="floating-card-icon">
                       <Icon size={18} />
                     </div>
@@ -238,11 +183,11 @@ export default function Hero() {
                       <h4>{card.title}</h4>
                       <p>{card.desc}</p>
                     </div>
-                  </motion.div>
+                  </div>
                 )
               })}
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>
