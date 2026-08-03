@@ -55,8 +55,19 @@ export default function Navbar() {
     }
   }
 
+  const CV_FILES = {
+    Technical: { url: '/downloads/Obaloluwa_Fajinmi_Technical_CV.pdf', filename: 'Obaloluwa_Fajinmi_Technical_CV.pdf' },
+    General: { url: '/downloads/Obaloluwa_Fajinmi_General_CV.pdf', filename: 'Obaloluwa_Fajinmi_General_CV.pdf' }
+  }
+
   const handleCvDownload = (type) => {
-    alert(`${type} CV placeholder. CV files will be configured here!`)
+    const file = CV_FILES[type]
+    const link = document.createElement('a')
+    link.href = file.url
+    link.download = file.filename
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
     setCvDropdownOpen(false)
   }
 

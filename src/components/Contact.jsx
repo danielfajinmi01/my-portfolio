@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { FiMail, FiMapPin, FiGithub, FiLinkedin, FiTwitter, FiBriefcase, FiSend } from 'react-icons/fi'
+import { FiMail, FiMapPin, FiGithub, FiLinkedin, FiTwitter, FiBriefcase, FiSend, FiLoader, FiCheck, FiAlertCircle } from 'react-icons/fi'
 import { SITE_DATA } from '../siteData.js'
 
 const SOCIAL_ICONS = {
@@ -9,28 +9,51 @@ const SOCIAL_ICONS = {
   upwork: FiBriefcase
 }
 
+// Create a form at https://formspree.io/forms and set VITE_FORMSPREE_FORM_ID in .env(.local)
+const FORMSPREE_FORM_ID = import.meta.env.VITE_FORMSPREE_FORM_ID
+const FORMSPREE_ENDPOINT = FORMSPREE_FORM_ID ? `https://formspree.io/f/${FORMSPREE_FORM_ID}` : null
+
+const STATUS_COPY = {
+  sending: 'Sending your message...',
+  sent: "Message sent! I'll get back to you within 24 hours.",
+  error: "Something went wrong sending your message. Please email me directly instead."
+}
+
 export default function Contact() {
   const [status, setStatus] = useState('idle')
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
 
-    const formData = new FormData(event.currentTarget)
-    const firstName = formData.get('firstName')?.toString().trim() ?? ''
-    const lastName = formData.get('lastName')?.toString().trim() ?? ''
-    const email = formData.get('email')?.toString().trim() ?? ''
-    const subjectVal = formData.get('subject')?.toString().trim() ?? ''
-    const message = formData.get('message')?.toString().trim() ?? ''
+    if (!FORMSPREE_ENDPOINT) {
+      console.error('Contact form is not configured: missing VITE_FORMSPREE_FORM_ID environment variable.')
+      setStatus('error')
+      return
+    }
 
-    const fullName = `${firstName} ${lastName}`.trim() || 'Portfolio Visitor'
-    const subject = encodeURIComponent(subjectVal || `Portfolio consultation request from ${fullName}`)
-    const body = encodeURIComponent(
-      `Visitor Details:\nFirst Name: ${firstName}\nLast Name: ${lastName}\nEmail: ${email}\n\nProject / Consultation Message:\n${message}`
-    )
+    const form = event.currentTarget
+    const formData = new FormData(form)
 
-    setStatus('sent')
-    window.location.href = `mailto:${SITE_DATA.email}?subject=${subject}&body=${body}`
-    setTimeout(() => setStatus('idle'), 3000)
+    setStatus('sending')
+
+    try {
+      const response = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        body: formData,
+        headers: { Accept: 'application/json' }
+      })
+
+      if (response.ok) {
+        setStatus('sent')
+        form.reset()
+      } else {
+        setStatus('error')
+      }
+    } catch (error) {
+      setStatus('error')
+    } finally {
+      setTimeout(() => setStatus('idle'), 5000)
+    }
   }
 
   return (
@@ -130,14 +153,22 @@ export default function Contact() {
                 <textarea id="message" name="message" required placeholder="Describe your project goals or contract requirements..." />
               </div>
 
-              <button type="submit" className="submit-btn" disabled={status === 'sent'} style={{ marginTop: '1.25rem' }}>
-                <FiSend size={18} />
-                <span>{status === 'sent' ? 'Opening Mail Client...' : 'Send Message'}</span>
+              <button type="submit" className="submit-btn" disabled={status === 'sending' || status === 'sent'} style={{ marginTop: '1.25rem' }}>
+                {status === 'sending' ? <FiLoader size={18} className="spin" /> : <FiSend size={18} />}
+                <span>{status === 'sending' ? 'Sending...' : status === 'sent' ? 'Message Sent' : 'Send Message'}</span>
               </button>
 
               {status === 'sent' && (
                 <div className="form-message success">
-                  <span>Launching your default email client with your details...</span>
+                  <FiCheck size={16} />
+                  <span>{STATUS_COPY.sent}</span>
+                </div>
+              )}
+
+              {status === 'error' && (
+                <div className="form-message error">
+                  <FiAlertCircle size={16} />
+                  <span>{STATUS_COPY.error}</span>
                 </div>
               )}
             </form>

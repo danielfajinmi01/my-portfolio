@@ -24,7 +24,7 @@ export default function Hobbies() {
           <p className="section-subtitle">
             What I enjoy doing when I am not writing code or engineering systems.
           </p>
-        </div>
+        </div>git 
 
         <div className="hobbies-grid">
           {HOBBIES.map((hobby, idx) => {

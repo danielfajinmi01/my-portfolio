@@ -117,9 +117,9 @@ export default function Projects() {
                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
                           <span className="project-type">{project.type}</span>
                           <span className={`project-status ${statusClass}`}>
-                            {project.status === 'deployed' 
-                              ? (project.statusLabel ? `• ${project.statusLabel}` : '• Deployed')
-                              : '• In Development'
+                            {project.statusLabel
+                              ? `• ${project.statusLabel}`
+                              : (project.status === 'deployed' ? '• Deployed' : '• In Development')
                             }
                           </span>
                         </div>

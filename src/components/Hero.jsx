@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { FiCode, FiMail, FiGithub, FiLayout, FiServer } from 'react-icons/fi'
 import { SITE_DATA } from '../siteData.js'
 import accessBankPreview from '../assets/access-bank-live.png'
 import mixlrPreview from '../assets/mixlr-live.png'
 
-const CountUp = ({ target, duration = 2000 }) => {
+const CountUp = ({ target, duration = 2000, active }) => {
   const [count, setCount] = useState(0)
-  const [started, setStarted] = useState(false)
+  const [finished, setFinished] = useState(false)
 
   useEffect(() => {
-    if (started) return
+    if (!active || finished) return
     let startTime
     let frameId
 
@@ -20,19 +20,16 @@ const CountUp = ({ target, duration = 2000 }) => {
       if (progress < 1) {
         frameId = requestAnimationFrame(updateCount)
       } else {
-        setStarted(true)
+        setFinished(true)
       }
     }
 
-    const timer = setTimeout(() => {
-      frameId = requestAnimationFrame(updateCount)
-    }, 500)
+    frameId = requestAnimationFrame(updateCount)
 
     return () => {
-      clearTimeout(timer)
       if (frameId) cancelAnimationFrame(frameId)
     }
-  }, [target, duration, started])
+  }, [target, duration, active, finished])
 
   return count
 }
@@ -41,6 +38,26 @@ export default function Hero() {
   const [typedRole, setTypedRole] = useState('')
   const [roleIndex, setRoleIndex] = useState(0)
   const [isDeleting, setIsDeleting] = useState(false)
+  const [statsInView, setStatsInView] = useState(false)
+  const statsRef = useRef(null)
+
+  useEffect(() => {
+    const el = statsRef.current
+    if (!el) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setStatsInView(true)
+          observer.disconnect()
+        }
+      },
+      { threshold: 0.3 }
+    )
+
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
 
   useEffect(() => {
     const roles = SITE_DATA.roles
@@ -111,24 +128,24 @@ export default function Hero() {
               </a>
             </div>
 
-            <div className="hero-stats">
+            <div className="hero-stats" ref={statsRef}>
               <div className="stat-item">
                 <div className="stat-number">
-                  <CountUp target={SITE_DATA.stats.yearsExperience} />
+                  <CountUp target={SITE_DATA.stats.yearsExperience} active={statsInView} />
                   <span className="stat-plus">+</span>
                 </div>
                 <p className="stat-label">Years Experience</p>
               </div>
               <div className="stat-item">
                 <div className="stat-number">
-                  <CountUp target={SITE_DATA.stats.projectsCompleted} />
+                  <CountUp target={SITE_DATA.stats.projectsCompleted} active={statsInView} />
                   <span className="stat-plus">+</span>
                 </div>
                 <p className="stat-label">Projects Completed</p>
               </div>
               <div className="stat-item">
                 <div className="stat-number">
-                  <CountUp target={SITE_DATA.stats.deployedProjects} />
+                  <CountUp target={SITE_DATA.stats.deployedProjects} active={statsInView} />
                 </div>
                 <p className="stat-label">Deployed Projects</p>
               </div>
@@ -167,7 +184,6 @@ export default function Hero() {
             </div>
 
             <div className="profile-name-badge">
-              <h3>{SITE_DATA.nickname}</h3>
               <p>{SITE_DATA.title}</p>
             </div>
 

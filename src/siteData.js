@@ -15,7 +15,7 @@ export const SITE_DATA = {
   nickname: "Obaloluwa",
   initials: "OKF",
   title: "Full Stack Software Engineer",
-  roles: ["Full Stack Software Engineer", "Frontend UI Specialist", "Systems Automation Developer", "Problem Solver"],
+  roles: ["Full Stack Software Engineer", "Frontend UI Specialist", "Problem Solver"],
   email: "danielfajinmi19@gmail.com",
   location: "Lagos, Nigeria",
   bio: "Crafting digital experiences through innovative design and robust development. Passionate about creating solutions that bridge the gap between user needs and business objectives with clean, efficient code. I specialize in building modern web and mobile applications that deliver exceptional user experiences.",
@@ -56,7 +56,8 @@ export const PROJECTS = [
     id: "moovable",
     title: "Moovable Technology",
     type: "Web App",
-    status: "deployed",
+    status: "in-development",
+    statusLabel: "Private Build",
     description: "AI logistics operating system & identity layer powering trusted logistics across Africa with real-time operations, verified operators, and fleet management.",
     longDescription: "Architected robust file upload structures and client-side services, ensuring secure payload delivery to backend endpoints. Converted comprehensive Figma designs to responsive web interfaces for logistics operators, business & enterprises, fleet owners, and individuals.",
     image: moovablePreview,
@@ -151,8 +152,8 @@ export const PROJECTS = [
     description: "An intuitive tracker application designed for women's health and period monitoring. Includes cycle predictions, health tracking logs, symptom logs, and educational resources.",
     longDescription: "Designed to provide a secure and supportive platform for tracking period cycles, forecasting ovulation dates, and keeping personal logs of daily health symptoms.",
     image: royalCarePreview,
-    technologies: ["React", "Tailwind CSS", "LocalForage", "Chart.js"],
-    features: ["Interactive cycle history calendar", "Ovulation & next period predictor calculations", "Detailed physical symptom logs", "Secure local browser storage encryption"],
+    technologies: ["React Native", "Expo", "AsyncStorage", "react-native-chart-kit"],
+    features: ["Interactive cycle history calendar", "Ovulation & next period predictor calculations", "Detailed physical symptom logs", "Secure on-device storage encryption"],
     github: null,
     liveUrl: null,
     featured: true,
@@ -239,19 +240,6 @@ export const TIMELINE = [
       "Designed mobile-first interaction screens",
       "Built offline-first local storage sync",
       "Created customizable theme modules for notes app"
-    ]
-  },
-  {
-    year: "Ongoing",
-    title: "Systems Automation & Data Modeling",
-    description: "Interfaced with complex simulation engines (AVEVA PIPEPHASE) using structured, text-based configuration and algorithmic modeling. Leveraged Python COM automation to rapidly process multi-variable performance metrics.",
-    type: "milestone",
-    icon: "wrench",
-    achievements: [
-      "Python COM automation integration",
-      "Algorithmic modeling with AVEVA PIPEPHASE",
-      "Data parsing and pipeline optimization",
-      "Bypassed manual GUI workflows for speed"
     ]
   },
   {

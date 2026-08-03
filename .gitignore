@@ -9,3 +9,5 @@ yarn-error.log*
 pnpm-debug.log*
 *.apk
 public/downloads/*.apk
+.env
+.env.local
