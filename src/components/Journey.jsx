@@ -1,7 +1,9 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState, lazy, Suspense } from 'react'
 import { FiBookOpen, FiCode, FiServer, FiSmartphone, FiMonitor, FiCheck } from 'react-icons/fi'
 import { FaRocket } from 'react-icons/fa'
 import { TIMELINE } from '../siteData.js'
+
+const JourneyMapBackground = lazy(() => import('./JourneyMapBackground.jsx'))
 
 const ICON_MAP = {
   book: FiBookOpen,
@@ -14,6 +16,8 @@ const ICON_MAP = {
 
 export default function Journey() {
   const journeyRef = useRef(null)
+  const timelineRef = useRef(null)
+  const [lineProgress, setLineProgress] = useState(0)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -41,8 +45,27 @@ export default function Journey() {
     return () => observer.disconnect()
   }, [])
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const el = timelineRef.current
+      if (!el) return
+
+      const rect = el.getBoundingClientRect()
+      const scrolled = window.innerHeight * 0.5 - rect.top
+      const progress = Math.min(Math.max(scrolled / rect.height, 0), 1)
+      setLineProgress(progress)
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    handleScroll()
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
   return (
     <section id="journey" className="journey" ref={journeyRef} style={{ background: 'var(--bg-primary)' }}>
+      <Suspense fallback={null}>
+        <JourneyMapBackground />
+      </Suspense>
       <div className="container">
         <div className="section-header reveal-on-scroll">
           <div className="section-tag">
@@ -73,9 +96,9 @@ export default function Journey() {
         </div>
 
         {/* Vertical Timeline */}
-        <div className="journey-timeline">
+        <div className="journey-timeline" ref={timelineRef}>
           <div className="timeline-line">
-            <div className="timeline-line-progress" style={{ height: '100%' }} />
+            <div className="timeline-line-progress" style={{ height: `${lineProgress * 100}%` }} />
           </div>
 
           {TIMELINE.map((item, index) => {

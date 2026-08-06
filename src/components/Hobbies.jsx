@@ -1,11 +1,11 @@
 import React from 'react'
-import { FiAward, FiMusic, FiBook, FiCompass, FiFilm, FiActivity } from 'react-icons/fi'
+import { FiMusic, FiBook, FiCompass, FiFilm, FiActivity, FiEdit3 } from 'react-icons/fi'
 import { FaGamepad } from 'react-icons/fa'
 import { HOBBIES } from '../siteData.js'
 
 const ICON_MAP = {
   gamepad: FaGamepad,
-  crown: FiAward,
+  pen: FiEdit3,
   music: FiMusic,
   mountain: FiCompass,
   book: FiBook,
@@ -24,7 +24,7 @@ export default function Hobbies() {
           <p className="section-subtitle">
             What I enjoy doing when I am not writing code or engineering systems.
           </p>
-        </div>git 
+        </div> 
 
         <div className="hobbies-grid">
           {HOBBIES.map((hobby, idx) => {

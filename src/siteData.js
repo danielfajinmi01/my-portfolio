@@ -290,7 +290,7 @@ export const SKILLS_CATEGORIES = [
 
 export const HOBBIES = [
   { icon: "gamepad", title: "Gaming", description: "Enthusiastic about strategic, sandbox, and competitive games" },
-  { icon: "crown", title: "Chess", description: "Exercising strategic thinking and tactical planning" },
+  { icon: "pen", title: "Writing", description: "Putting thoughts into words, from technical notes to personal reflections" },
   { icon: "music", title: "Music", description: "Listening to rock, indie, and ambient electronic beats" },
   { icon: "book", title: "Reading", description: "Keeping up with tech journals, manga, and sci-fi books" },
   { icon: "mountain", title: "Exploration", description: "Exploring outdoor locations, landscapes, and getting nature walks" },
