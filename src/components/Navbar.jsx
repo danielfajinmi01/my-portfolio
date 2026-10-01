@@ -13,8 +13,10 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('home')
-  const [cvDropdownOpen, setCvDropdownOpen] = useState(false)
-  const dropdownRef = useRef(null)
+  const [desktopCvOpen, setDesktopCvOpen] = useState(false)
+  const [mobileCvOpen, setMobileCvOpen] = useState(false)
+  const desktopDropdownRef = useRef(null)
+  const mobileDropdownRef = useRef(null)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -35,20 +37,37 @@ export default function Navbar() {
   }, [])
 
   useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
-        setCvDropdownOpen(false)
+    const handlePointerDown = (e) => {
+      if (desktopDropdownRef.current && !desktopDropdownRef.current.contains(e.target)) {
+        setDesktopCvOpen(false)
+      }
+      if (mobileDropdownRef.current && !mobileDropdownRef.current.contains(e.target)) {
+        setMobileCvOpen(false)
       }
     }
-    if (cvDropdownOpen) {
-      document.addEventListener('mousedown', handleClickOutside)
+
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        setDesktopCvOpen(false)
+        setMobileCvOpen(false)
+      }
     }
-    return () => document.removeEventListener('mousedown', handleClickOutside)
-  }, [cvDropdownOpen])
+
+    if (desktopCvOpen || mobileCvOpen) {
+      document.addEventListener('mousedown', handlePointerDown)
+      document.addEventListener('keydown', handleKeyDown)
+    }
+    return () => {
+      document.removeEventListener('mousedown', handlePointerDown)
+      document.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [desktopCvOpen, mobileCvOpen])
 
   const handleNavClick = (e, href) => {
     e.preventDefault()
     setMobileMenuOpen(false)
+    setMobileCvOpen(false)
+    setDesktopCvOpen(false)
     const target = document.querySelector(href)
     if (target) {
       target.scrollIntoView({ behavior: 'smooth' })
@@ -68,8 +87,23 @@ export default function Navbar() {
     document.body.appendChild(link)
     link.click()
     document.body.removeChild(link)
-    setCvDropdownOpen(false)
+    setDesktopCvOpen(false)
+    setMobileCvOpen(false)
+    setMobileMenuOpen(false)
   }
+
+  const renderCvOptions = (itemClassName) => (
+    <>
+      <button className={itemClassName} role="menuitem" onClick={() => handleCvDownload('Technical')}>
+        <span>Technical CV</span>
+        <span className="cv-description">For developer & tech roles</span>
+      </button>
+      <button className={itemClassName} role="menuitem" onClick={() => handleCvDownload('General')}>
+        <span>General CV</span>
+        <span className="cv-description">For general opportunities</span>
+      </button>
+    </>
+  )
 
   return (
     <>
@@ -102,30 +136,38 @@ export default function Navbar() {
             })}
           </ul>
 
-          <div className="cv-dropdown" ref={dropdownRef}>
-            <button className="cv-download-btn" onClick={() => setCvDropdownOpen(!cvDropdownOpen)}>
+          <div className="cv-dropdown" ref={desktopDropdownRef}>
+            <button
+              className="cv-download-btn"
+              onClick={() => {
+                setDesktopCvOpen((open) => !open)
+                setMobileCvOpen(false)
+              }}
+              aria-haspopup="menu"
+              aria-expanded={desktopCvOpen}
+              aria-controls="desktop-cv-menu"
+            >
               <FiDownload size={18} />
               <span>Download CV</span>
-              <FiChevronDown size={16} className={`dropdown-icon ${cvDropdownOpen ? 'open' : ''}`} />
+              <FiChevronDown size={16} className={`dropdown-icon ${desktopCvOpen ? 'open' : ''}`} />
             </button>
-            {cvDropdownOpen && (
-              <div className="cv-dropdown-menu open">
-                <button className="cv-dropdown-item" onClick={() => handleCvDownload('Technical')}>
-                  <span>Technical CV</span>
-                  <span className="cv-description">For developer & tech roles</span>
-                </button>
-                <button className="cv-dropdown-item" onClick={() => handleCvDownload('General')}>
-                  <span>General CV</span>
-                  <span className="cv-description">For general opportunities</span>
-                </button>
+            {desktopCvOpen && (
+              <div className="cv-dropdown-menu open" id="desktop-cv-menu" role="menu">
+                {renderCvOptions('cv-dropdown-item')}
               </div>
             )}
           </div>
 
           <button
             className="mobile-toggle"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            onClick={() => {
+              setMobileMenuOpen((open) => !open)
+              setDesktopCvOpen(false)
+              setMobileCvOpen(false)
+            }}
             aria-label="Toggle menu"
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-menu"
           >
             {mobileMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
           </button>
@@ -133,7 +175,7 @@ export default function Navbar() {
       </nav>
 
       {/* Mobile Menu */}
-      <div className={`mobile-menu ${mobileMenuOpen ? 'active' : ''}`}>
+      <div className={`mobile-menu ${mobileMenuOpen ? 'active' : ''}`} id="mobile-menu">
         <ul className="mobile-menu-links">
           {NAV_LINKS.map((link) => {
             const Icon = link.icon
@@ -147,24 +189,26 @@ export default function Navbar() {
             )
           })}
           <li>
-            <div className="mobile-cv-menu">
-              <button className="mobile-cv-btn" onClick={() => setCvDropdownOpen(!cvDropdownOpen)}>
+            <div className="mobile-cv-menu" ref={mobileDropdownRef}>
+              <button
+                className="mobile-cv-btn"
+                onClick={() => {
+                  setMobileCvOpen((open) => !open)
+                  setDesktopCvOpen(false)
+                }}
+                aria-haspopup="menu"
+                aria-expanded={mobileCvOpen}
+                aria-controls="mobile-cv-menu"
+              >
                 <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                   <FiDownload size={24} />
                   Download CV
                 </span>
-                <FiChevronDown size={18} className={`dropdown-icon ${cvDropdownOpen ? 'open' : ''}`} />
+                <FiChevronDown size={18} className={`dropdown-icon ${mobileCvOpen ? 'open' : ''}`} />
               </button>
-              {cvDropdownOpen && (
-                <div className="mobile-cv-dropdown-menu open">
-                  <button className="mobile-cv-dropdown-item" onClick={() => handleCvDownload('Technical')}>
-                    <span>Technical CV</span>
-                    <span className="cv-description">For developer & tech roles</span>
-                  </button>
-                  <button className="mobile-cv-dropdown-item" onClick={() => handleCvDownload('General')}>
-                    <span>General CV</span>
-                    <span className="cv-description">For general opportunities</span>
-                  </button>
+              {mobileCvOpen && (
+                <div className="mobile-cv-dropdown-menu open" id="mobile-cv-menu" role="menu">
+                  {renderCvOptions('mobile-cv-dropdown-item')}
                 </div>
               )}
             </div>

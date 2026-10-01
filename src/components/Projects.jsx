@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { FiGithub, FiExternalLink, FiLock, FiTerminal, FiDownload } from 'react-icons/fi'
-import { SITE_DATA, PROJECTS } from '../siteData.js'
+import { FiGithub, FiExternalLink, FiLock, FiBriefcase, FiDownload } from 'react-icons/fi'
+import { PROJECTS } from '../siteData.js'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -17,7 +17,7 @@ export default function Projects() {
 
     const mm = gsap.matchMedia()
 
-    mm.add('(min-width: 300px)', () => {
+    mm.add('(min-width: 901px) and (prefers-reduced-motion: no-preference)', () => {
       // 1. Initial State Setup: Card 0 visible, cards 1..N below stage
       cards.forEach((card, i) => {
         if (i !== 0) {
@@ -70,6 +70,12 @@ export default function Projects() {
       })
     })
 
+    mm.add('(max-width: 900px), (prefers-reduced-motion: reduce)', () => {
+      cards.forEach((card) => {
+        gsap.set(card, { clearProps: 'all' })
+      })
+    })
+
     return () => mm.revert()
   }, [])
 
@@ -92,6 +98,7 @@ export default function Projects() {
             const statusClass = project.status === 'deployed' ? 'deployed' : 'in-development'
             const projectNumber = String(index + 1).padStart(2, '0')
             const totalCount = String(PROJECTS.length).padStart(2, '0')
+            const isMobileProject = project.type?.toLowerCase().includes('mobile')
 
             return (
               <div
@@ -102,12 +109,21 @@ export default function Projects() {
               >
                 <article className="card-inner">
                   {/* Left Column: Image Box */}
-                  <div className="card-image-box">
-                    <img
-                      src={project.image}
-                      alt={`${project.title} Preview`}
-                      className={`card-img ${project.type?.toLowerCase().includes('mobile') ? 'mobile' : 'web'}`}
-                    />
+                  <div className={`card-image-box ${isMobileProject ? 'phone-frame' : 'browser-frame'}`}>
+                    {!isMobileProject && (
+                      <div className="browser-chrome" aria-hidden="true">
+                        <span />
+                        <span />
+                        <span />
+                      </div>
+                    )}
+                    <div className="screenshot-surface">
+                      <img
+                        src={project.image}
+                        alt={`${project.title} preview`}
+                        className={`card-img ${isMobileProject ? 'mobile' : 'web'}`}
+                      />
+                    </div>
                   </div>
 
                   {/* Right Column: Information & Actions */}
@@ -115,6 +131,7 @@ export default function Projects() {
                     <div>
                       <div className="card-header-meta">
                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
+                          <span className="project-context-label">{project.contextLabel}</span>
                           <span className="project-type">{project.type}</span>
                           <span className={`project-status ${statusClass}`}>
                             {project.statusLabel
@@ -138,6 +155,7 @@ export default function Projects() {
                       </div>
                       
                       <p className="card-desc">{project.description}</p>
+                      <p className="mobile-card-role"><strong>Role:</strong> {project.role}</p>
 
                       <div className="card-tech-stack">
                         {project.technologies.slice(0, 4).map(tech => (
@@ -145,12 +163,12 @@ export default function Projects() {
                         ))}
                       </div>
 
-                      <div className="card-scope-notes">
+                      <div className="card-contribution-notes">
                         <p style={{ display: 'flex', alignItems: 'center', gap: '5px', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '0.15rem' }}>
-                          <FiTerminal size={12} /> Scope & Execution Details
+                          <FiBriefcase size={12} /> Contribution
                         </p>
-                        <p><strong>Role:</strong> {project.role}</p>
-                        <p><strong>Core Focus:</strong> {project.features[0]}</p>
+                        <p><strong>{project.role}</strong></p>
+                        <p>{project.longDescription.replace(`${project.role}: `, '')}</p>
                       </div>
                     </div>
 
@@ -184,7 +202,8 @@ export default function Projects() {
 
                       {!project.liveUrl && !project.apkUrl && (
                         <span className="project-link disabled private">
-                          <FiLock size={14} style={{ marginRight: '5px' }} /> Ongoing Build
+                          <FiLock size={14} style={{ marginRight: '5px' }} />
+                          {project.actionLabel || 'Private Project'}
                         </span>
                       )}
 
@@ -193,7 +212,7 @@ export default function Projects() {
                           href={project.github}
                           target="_blank"
                           rel="noreferrer"
-                          className="project-link"
+                          className="project-link secondary"
                         >
                           <FiGithub size={14} /> Repository
                         </a>

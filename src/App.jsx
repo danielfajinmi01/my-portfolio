@@ -5,6 +5,7 @@ import { SpeedInsights } from '@vercel/speed-insights/react'
 import Navbar from './components/Navbar.jsx'
 import Hero from './components/Hero.jsx'
 import About from './components/About.jsx'
+import Experience from './components/Experience.jsx'
 import Projects from './components/Projects.jsx'
 import Skills from './components/Skills.jsx'
 import Journey from './components/Journey.jsx'
@@ -32,6 +33,7 @@ export default function App() {
       <main id="main-content">
         <Hero />
         <About />
+        <Experience />
         <Projects />
         <Skills />
         <Journey />

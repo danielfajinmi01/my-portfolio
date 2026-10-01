@@ -16,7 +16,7 @@ export default function JourneyMapBackground() {
     })
 
     return map.getSVG({
-      radius: 0.32,
+      radius: 0.12,
       color: 'rgba(255, 255, 255, 0.08)',
       shape: 'circle',
       backgroundColor: 'transparent'

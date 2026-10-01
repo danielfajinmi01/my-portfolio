@@ -9,16 +9,23 @@ import royalNotesLogo from './assets/royal-notes-logo.png'
 import royalPayPreview from './assets/royal-pay-preview.png'
 import royalCarePreview from './assets/royal-care-preview.png'
 import igceNetworkPreview from './assets/igce-network-preview.png'
+import sotaBenchmarkPreview from './assets/sota-benchmark-preview.svg'
 
 export const SITE_DATA = {
   name: "Obaloluwa Kolade Fajinmi",
   nickname: "Obaloluwa",
   initials: "OKF",
-  title: "Full Stack Software Engineer",
-  roles: ["Full Stack Software Engineer", "Frontend UI Specialist", "Problem Solver"],
+  title: "Software Engineer",
+  roles: ["Software Engineer"],
+  secondaryRoles: [
+    "building frontend systems",
+    "shipping full-stack products",
+    "engineering mobile experiences",
+    "turning product ideas into products"
+  ],
   email: "danielfajinmi19@gmail.com",
   location: "Lagos, Nigeria",
-  bio: "Crafting digital experiences through innovative design and robust development. Passionate about creating solutions that bridge the gap between user needs and business objectives with clean, efficient code. I specialize in building modern web and mobile applications that deliver exceptional user experiences.",
+  bio: "Frontend-specialized software engineer building polished web and mobile products from interface to deployment.",
   tagline: "Available for remote contracts",
   socialLinks: {
     github: "https://github.com/danielfajinmi01",
@@ -30,18 +37,44 @@ export const SITE_DATA = {
     yearsExperience: 2,
     projectsCompleted: 16,
     deployedProjects: 6
-  }
+  },
+  heroStats: [
+    { value: "2+", label: "Years", detail: "Building" },
+    { value: "Production", label: "Experience", detail: "Frontend delivery" },
+    { value: "Web + Mobile", label: "Delivery", detail: "Interface to release" }
+  ]
 }
 
 export const PROJECTS = [
+  {
+    id: "moovable",
+    title: "Moovable",
+    type: "Logistics Technology Platform",
+    status: "in-development",
+    statusLabel: "Private Build",
+    contextLabel: "PROFESSIONAL EXPERIENCE",
+    description: "A private logistics platform focused on responsive operator workflows, identity-aware interfaces, and production-ready frontend implementation.",
+    longDescription: "Frontend Engineer: Responsive logistics dashboards, production UI implementation, and API-connected workflows.",
+    image: moovablePreview,
+    technologies: ["React", "Next.js", "TypeScript", "REST API", "Auth"],
+    features: ["Responsive logistics dashboards", "Identity-aware user states", "Figma to Web conversion", "Client-side service integration"],
+    github: null,
+    liveUrl: "https://getmoovable.com/",
+    actionLabel: "Live Site",
+    featured: true,
+    completionPercentage: 100,
+    role: "Frontend Engineer",
+    duration: "Contract"
+  },
   {
     id: "igcenetwork",
     title: "IGCE Network",
     type: "Telecommunications Web App",
     status: "deployed",
     statusLabel: "Deployed",
+    contextLabel: "PROFESSIONAL WORK",
     description: "A modern broadband telecommunications platform for IGCE Network Limited, featuring high-speed internet subscription plans, service coverage maps, and online onboarding.",
-    longDescription: "Architected a responsive corporate web platform for an Internet Service Provider (ISP), featuring dynamic plan calculators, coverage location checks, and seamless user signup workflows.",
+    longDescription: "Full Stack Developer: Broadband product experiences, service interfaces, and application integration.",
     image: igceNetworkPreview,
     technologies: ["React", "Tailwind CSS", "REST API", "GSAP"],
     features: ["Broadband subscription plan showcases", "Interactive coverage area lookup", "Figma to Web conversion", "Client signup & account onboarding"],
@@ -53,71 +86,40 @@ export const PROJECTS = [
     duration: "Completed"
   },
   {
-    id: "moovable",
-    title: "Moovable Technology",
-    type: "Web App",
+    id: "sota-benchmark",
+    title: "SOTA Engineering & Benchmarking",
+    type: "Engineering Research",
     status: "in-development",
-    statusLabel: "Private Build",
-    description: "AI logistics operating system & identity layer powering trusted logistics across Africa with real-time operations, verified operators, and fleet management.",
-    longDescription: "Architected robust file upload structures and client-side services, ensuring secure payload delivery to backend endpoints. Converted comprehensive Figma designs to responsive web interfaces for logistics operators, business & enterprises, fleet owners, and individuals.",
-    image: moovablePreview,
-    technologies: ["React", "Next.js", "TypeScript", "REST API", "Auth"],
-    features: ["Dynamic user authentication states", "Logistics operator & fleet owner management", "Figma to Web conversion", "Client-side state management"],
+    statusLabel: "Selective Disclosure",
+    contextLabel: "ENGINEERING RESEARCH",
+    description: "Engineering problem solving, benchmark workflow validation, and implementation review where public details are intentionally limited.",
+    longDescription: "Software Engineer: Technical validation, benchmark workflows, and implementation quality checks without exposing protected material.",
+    image: sotaBenchmarkPreview,
+    technologies: ["React", "JavaScript", "Playwright", "Git"],
+    features: ["Benchmark workflow design", "Repeatable browser checks", "Performance-minded implementation", "Private source handling"],
     github: null,
     liveUrl: null,
+    actionLabel: "Details Limited",
     featured: true,
-    completionPercentage: 100,
-    role: "Frontend Implementation Lead",
-    duration: "Contract"
-  },
-  {
-    id: "accessbank",
-    title: "Access Bank Clone",
-    type: "Web App",
-    status: "deployed",
-    description: "A frontend clone of Access Bank's corporate site with responsive layout and interactive components. Features accurate styling, custom navigation controls, and optimized layout assets.",
-    longDescription: "A frontend replica of the Access Bank corporate banking platform, emphasizing responsive UI designs, navigation accessibility, and interactive elements. Implemented complex nested dropdown navigation flows.",
-    image: accessBankPreview,
-    technologies: ["React", "Tailwind CSS", "Custom Hooks", "Responsive UI"],
-    features: ["Responsive dropdown navigation menus", "Accessibility-compliant layouts", "Custom responsive hooks", "Pixel-perfect styling replications"],
-    github: "https://github.com/danielfajinmi01/access-bank-frontend-project",
-    liveUrl: "https://access-bank-frontend-project.vercel.app",
-    featured: true,
-    completionPercentage: 100,
-    role: "Frontend Developer",
-    duration: "2 weeks"
-  },
-  {
-    id: "mixlr",
-    title: "Mixlr Clone",
-    type: "Web App",
-    status: "deployed",
-    description: "A frontend replica of the Mixlr audio broadcasting site, focusing on layout fidelity, responsive grid structure, and media component structures.",
-    longDescription: "Achieved a pixel-perfect layout that matched the original audio platform's complex grid structures and responsive details, focusing on reusability and components optimization.",
-    image: mixlrPreview,
-    technologies: ["React", "Tailwind CSS", "CSS Grid", "Flexbox"],
-    features: ["Advanced CSS Grid configurations", "Responsive audio layout panels", "Modular card components", "Fluid mobile scaling"],
-    github: "https://github.com/danielfajinmi01/live-coding-mixlr",
-    liveUrl: "https://live-coding-mixlr-qxdap1i4j-danielfajinmi01s-projects.vercel.app/",
-    featured: true,
-    completionPercentage: 100,
-    role: "Frontend Developer",
-    duration: "3 weeks"
+    completionPercentage: 60,
+    role: "Software Engineer",
+    duration: "Ongoing"
   },
   {
     id: "royalnote",
     title: "Royal Note",
     type: "Mobile App",
     status: "deployed",
-    statusLabel: "APK Available",
-    description: "A customizable React Native notes application designed for capturing, organizing, and styling personal logs. Features markdown editing, custom tags, themes, and robust local search capabilities.",
-    longDescription: "Royal Note provides a highly customizable writing and note-taking experience on mobile. Users can categorize their thoughts with tags, apply dynamic visual themes, and store details securely using offline-first storage.",
+    statusLabel: "Android APK Available",
+    contextLabel: "MOBILE PRODUCT",
+    description: "A published Android note-taking application for capturing, organizing, and styling personal logs with offline-first behavior.",
+    longDescription: "Mobile Developer: Android note-taking product delivery, offline-first storage, writing workflows, and ongoing iOS release preparation.",
     image: royalNotePreview,
     icon: royalNotesIcon,
     logo: royalNotesLogo,
     apkUrl: "/downloads/RoyalNotes.apk",
-    technologies: ["React Native", "Expo", "AsyncStorage", "Paper UI"],
-    features: ["Markdown text formatting support", "Dynamic UI theme customizations", "Hierarchical tag folder systems", "Full-text offline search logs"],
+    technologies: ["React Native", "Expo", "AsyncStorage", "Mobile Release"],
+    features: ["Markdown text formatting support", "Dynamic UI theme customizations", "Offline-first local storage", "iOS release preparation"],
     github: null,
     liveUrl: null,
     featured: true,
@@ -131,8 +133,9 @@ export const PROJECTS = [
     type: "Fintech Web App",
     status: "deployed",
     statusLabel: "Deployed",
-    description: "A modern financial payment web application built with a Firebase Backend-as-a-Service (BaaS). Supports secure transactions, account ledger updates, wallet balances, and user logs.",
-    longDescription: "A fintech dashboard build utilizing Firebase for real-time transactional storage and user authentication. Supports wallet deposits, ledger transfers, and dynamic payment link creations.",
+    contextLabel: "INDEPENDENT PRODUCT",
+    description: "A financial payment web application built with Firebase-backed data flows, wallet balances, and transaction logs.",
+    longDescription: "Full Stack Developer: Firebase-backed product flows, account ledger updates, and payment interface implementation.",
     image: royalPayPreview,
     technologies: ["React", "Firebase BaaS", "Firestore DB", "Tailwind CSS", "Cloud Functions"],
     features: ["Real-time transaction wallet ledger", "Secure user login authentication", "Deposit/withdrawal operations", "Interactive financial analytics charts"],
@@ -149,6 +152,7 @@ export const PROJECTS = [
     type: "Mobile App",
     status: "in-development",
     statusLabel: "In Development",
+    contextLabel: "INDEPENDENT PRODUCT",
     description: "An intuitive tracker application designed for women's health and period monitoring. Includes cycle predictions, health tracking logs, symptom logs, and educational resources.",
     longDescription: "Designed to provide a secure and supportive platform for tracking period cycles, forecasting ovulation dates, and keeping personal logs of daily health symptoms.",
     image: royalCarePreview,
@@ -160,6 +164,42 @@ export const PROJECTS = [
     completionPercentage: 45,
     role: "Full Stack Developer",
     duration: "Ongoing"
+  },
+  {
+    id: "accessbank",
+    title: "Access Bank Clone",
+    type: "Web App",
+    status: "deployed",
+    contextLabel: "LEARNING PROJECT",
+    description: "A frontend learning project recreating Access Bank's corporate site with responsive layout, custom navigation controls, and optimized layout assets.",
+    longDescription: "A frontend replica of the Access Bank corporate banking platform, emphasizing responsive UI designs, navigation accessibility, and interactive elements. Implemented complex nested dropdown navigation flows.",
+    image: accessBankPreview,
+    technologies: ["React", "Tailwind CSS", "Custom Hooks", "Responsive UI"],
+    features: ["Responsive dropdown navigation menus", "Accessibility-compliant layouts", "Custom responsive hooks", "Pixel-perfect styling replications"],
+    github: "https://github.com/danielfajinmi01/access-bank-frontend-project",
+    liveUrl: "https://access-bank-frontend-project.vercel.app",
+    featured: true,
+    completionPercentage: 100,
+    role: "Frontend Developer",
+    duration: "2 weeks"
+  },
+  {
+    id: "mixlr",
+    title: "Mixlr Clone",
+    type: "Web App",
+    status: "deployed",
+    contextLabel: "LEARNING PROJECT",
+    description: "A frontend learning project recreating Mixlr's audio broadcasting site with careful layout fidelity, responsive grids, and reusable media components.",
+    longDescription: "Achieved a pixel-perfect layout that matched the original audio platform's complex grid structures and responsive details, focusing on reusability and components optimization.",
+    image: mixlrPreview,
+    technologies: ["React", "Tailwind CSS", "CSS Grid", "Flexbox"],
+    features: ["Advanced CSS Grid configurations", "Responsive audio layout panels", "Modular card components", "Fluid mobile scaling"],
+    github: "https://github.com/danielfajinmi01/live-coding-mixlr",
+    liveUrl: "https://live-coding-mixlr-qxdap1i4j-danielfajinmi01s-projects.vercel.app/",
+    featured: true,
+    completionPercentage: 100,
+    role: "Frontend Developer",
+    duration: "3 weeks"
   }
 ]
 
@@ -223,7 +263,7 @@ export const TIMELINE = [
     type: "skill",
     icon: "server",
     achievements: [
-      "Built scalable server APIs with Express",
+      "Built server APIs with Express",
       "Learned MongoDB schema designs & queries",
       "Integrated Firebase Authentication & Firestore",
       "Built ledger systems in Royal Pay web application"
@@ -232,14 +272,14 @@ export const TIMELINE = [
   {
     year: "2026",
     title: "Mobile App Development",
-    description: "Acquired mobile capabilities using React Native and Expo. Developed offline-first capabilities using AsyncStorage and local storage, implementing note customization layouts in Royal Note.",
+    description: "Built mobile products with React Native/Expo and Flutter/Dart, including Android deployment through Google Play while iOS release work remains in progress.",
     type: "skill",
     icon: "mobile",
     achievements: [
-      "Mastered React Native & Expo frameworks",
+      "Built with React Native, Expo, Flutter and Dart",
       "Designed mobile-first interaction screens",
-      "Built offline-first local storage sync",
-      "Created customizable theme modules for notes app"
+      "Deployed a Flutter application to Google Play",
+      "Continuing iOS deployment preparation"
     ]
   },
   {
@@ -260,31 +300,59 @@ export const TIMELINE = [
 export const SKILLS_CATEGORIES = [
   {
     icon: "code",
-    title: "Frontend Development",
-    description: "Crafting beautiful, responsive user interfaces with modern frameworks. Focus on clean layout, accessibility, and high performance.",
-    technologies: ["React", "JavaScript", "Tailwind CSS", "GSAP", "Vite", "HTML5/CSS3"],
-    highlights: ["Responsive layouts", "Custom hooks & hooks flows", "Pixel-perfect mockups", "DOM accessibility standards"]
+    tab: "frontend",
+    title: "Frontend Engineering",
+    description: "Polished, responsive interfaces and product experiences.",
+    technologies: ["React", "Next.js", "TypeScript", "JavaScript", "Tailwind", "GSAP", "Three.js"]
   },
   {
     icon: "server",
-    title: "Backend Development",
-    description: "Building resilient server layers, RESTful APIs, and cloud services. Implementing secure authentication and database schemas.",
-    technologies: ["Node.js", "Express", "MongoDB", "Firebase BaaS", "RESTful APIs"],
-    highlights: ["API design & middleware functions", "Database schema queries", "NoSQL integrations", "User logins & sessions"]
+    tab: "backend",
+    title: "Backend & Data",
+    description: "APIs, backend services, authentication and application data.",
+    technologies: ["Django", "Node.js", "Express", "Firebase", "MongoDB"]
   },
   {
     icon: "smartphone",
-    title: "Mobile Development",
-    description: "Developing cross-platform mobile apps with React Native. Structuring offline storage modules and clean UX layouts.",
-    technologies: ["React Native", "Expo", "AsyncStorage", "React Navigation"],
-    highlights: ["Cross-platform builds (iOS/Android)", "Offline local storage", "Theme customizers", "Native performance layouts"]
+    tab: "mobile",
+    title: "Mobile Engineering",
+    description: "Cross-platform mobile products from development to release.",
+    technologies: ["Flutter", "Dart", "React Native", "Expo"],
+  },
+  {
+    icon: "cloud",
+    tab: "cloud",
+    title: "Cloud & Deployment",
+    description: "Web hosting, backend deployment and mobile release workflows.",
+    technologies: ["Vercel", "Heroku", "Google Play"]
   },
   {
     icon: "wrench",
-    title: "Workflow & Tools",
-    description: "Structuring clean versioning, continuous builds, and workflow automation. Using collaborative code tools.",
-    technologies: ["Git & GitHub", "Antigravity IDE", "Postman", "npm/yarn", "Vercel", "Vite Build"],
-    highlights: ["Git branches & pull requests", "API testing with Postman", "Deployment pipelines", "Vite configurations"]
+    tab: "workflow",
+    title: "Testing & Workflow",
+    description: "Testing, debugging, version control and API validation.",
+    technologies: ["Playwright", "Git", "GitHub", "Postman"]
+  }
+]
+
+export const CURRENTLY_EXPLORING = ["Supabase", "Render"]
+
+export const AI_ASSISTED_ENGINEERING = {
+  tools: ["Antigravity", "Codex", "Gemini"],
+  description: "Agent-assisted development, debugging and technical research."
+}
+
+export const EXPERIENCE = [
+  {
+    company: "Moovable",
+    role: "Frontend Engineer",
+    label: "Professional Experience",
+    bullets: [
+      "Production frontend implementation",
+      "Responsive logistics/operator product interfaces",
+      "API-integrated workflows",
+      "Interface delivery from product designs"
+    ]
   }
 ]
 

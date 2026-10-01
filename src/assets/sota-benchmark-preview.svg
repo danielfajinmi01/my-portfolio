@@ -1,0 +1,104 @@
+<svg width="1692" height="884" viewBox="0 0 1692 884" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1692" height="884" fill="#050505"/>
+  <rect y="67" width="1692" height="1" fill="#151515"/>
+  <rect y="783" width="1692" height="1" fill="#151515"/>
+  <g opacity="0.32">
+    <path d="M0 164H1692" stroke="#111"/>
+    <path d="M0 260H1692" stroke="#111"/>
+    <path d="M0 356H1692" stroke="#111"/>
+    <path d="M0 452H1692" stroke="#111"/>
+    <path d="M0 548H1692" stroke="#111"/>
+    <path d="M0 644H1692" stroke="#111"/>
+    <path d="M0 740H1692" stroke="#111"/>
+    <path d="M160 0V884" stroke="#111"/>
+    <path d="M400 0V884" stroke="#111"/>
+    <path d="M640 0V884" stroke="#111"/>
+    <path d="M880 0V884" stroke="#111"/>
+    <path d="M1120 0V884" stroke="#111"/>
+    <path d="M1360 0V884" stroke="#111"/>
+  </g>
+  <g transform="translate(298 18)">
+    <rect width="30" height="30" rx="8" fill="#0D0D0D" stroke="#252525"/>
+    <path d="M8 16.5C9.8 11.5 13.9 9 18.3 10.1C21.8 11 23.6 13.8 22.7 17.2C21.6 21.2 17.3 23.2 12.7 21.5" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+    <path d="M9 17.2L12.8 13.4L16.4 16.2" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="40" y="21" fill="#F3F3F3" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="700">Shipd</text>
+  </g>
+  <text x="1222" y="38" fill="#A8A8A8" font-family="Inter, Arial, sans-serif" font-size="14">Sign In</text>
+  <rect x="1293" y="17" width="109" height="36" rx="9" fill="#C65308"/>
+  <text x="1325" y="40" fill="#fff" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="700">Get Started</text>
+  <g transform="translate(338 102)">
+    <text x="0" y="12" fill="#9CB1BC" font-family="JetBrains Mono, monospace" font-size="12" font-weight="700" letter-spacing="3">COMMUNITY</text>
+    <text x="0" y="62" fill="#fff" font-family="Inter, Arial, sans-serif" font-size="36" font-weight="400">Where Kaggle grandmasters, OSS contributors,</text>
+    <text x="0" y="106" fill="#fff" font-family="Inter, Arial, sans-serif" font-size="36" font-weight="400">and tinkerers compete</text>
+  </g>
+  <g transform="translate(338 312)">
+    <g>
+      <rect x="0" y="0" width="47" height="47" rx="11" fill="#071224" stroke="#1F2E48"/>
+      <path d="M15 17L23 25L15 33L9 27L17 19L15 17Z" fill="#79C7FF"/>
+      <path d="M26 12L38 17L31 25L21 20L26 12Z" fill="#49A7E8"/>
+      <path d="M26 35L38 30L31 22L21 27L26 35Z" fill="#49A7E8"/>
+      <text x="0" y="68" fill="#8E8E8E" font-family="Inter, Arial, sans-serif" font-size="10">LangChain</text>
+    </g>
+    <g transform="translate(66 0)">
+      <rect width="47" height="47" rx="11" fill="#F9F9F9"/>
+      <path d="M9 31C14 16 19 16 24 31C29 16 34 16 39 31" stroke="#0677FF" stroke-width="5" stroke-linecap="round"/>
+      <text x="5" y="68" fill="#8E8E8E" font-family="Inter, Arial, sans-serif" font-size="10">React</text>
+    </g>
+    <g transform="translate(132 0)">
+      <rect width="47" height="47" rx="11" fill="#101018" stroke="#2B243E"/>
+      <path d="M17 36C22 22 27 13 32 11C40 14 36 29 26 40" stroke="#8E64FF" stroke-width="5" stroke-linecap="round"/>
+      <circle cx="18" cy="24" r="4" fill="#8E64FF"/>
+      <text x="4" y="68" fill="#8E8E8E" font-family="Inter, Arial, sans-serif" font-size="10">Airbyte</text>
+    </g>
+    <g transform="translate(198 0)">
+      <rect width="47" height="47" rx="11" fill="#050505" stroke="#222"/>
+      <path d="M24 13L36 34H12L24 13Z" fill="#fff"/>
+      <text x="0" y="68" fill="#8E8E8E" font-family="Inter, Arial, sans-serif" font-size="10">Next.js</text>
+    </g>
+    <g transform="translate(0 88)">
+      <rect width="47" height="47" rx="11" fill="#fff"/>
+      <path d="M24 9C11 19 10 31 19 37C28 43 41 35 38 23" stroke="#FA4E2D" stroke-width="5" stroke-linecap="round"/>
+      <circle cx="31" cy="18" r="4" fill="#FA4E2D"/>
+      <text x="5" y="68" fill="#8E8E8E" font-family="Inter, Arial, sans-serif" font-size="10">PyTorch</text>
+    </g>
+    <g transform="translate(66 88)">
+      <rect width="47" height="47" rx="11" fill="#111" stroke="#333"/>
+      <circle cx="23.5" cy="23.5" r="17" fill="#FFD24C"/>
+      <path d="M15 27C20 34 27 34 33 27" stroke="#5A3900" stroke-width="2" stroke-linecap="round"/>
+      <circle cx="17" cy="21" r="2" fill="#5A3900"/>
+      <circle cx="30" cy="21" r="2" fill="#5A3900"/>
+      <text x="-1" y="68" fill="#8E8E8E" font-family="Inter, Arial, sans-serif" font-size="10">Hugging Face</text>
+    </g>
+    <text x="0" y="192" fill="#fff" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="800">Top OSS contributors</text>
+    <text x="0" y="221" fill="#C8C8C8" font-family="Inter, Arial, sans-serif" font-size="15">From the world's most impactful open-source</text>
+    <text x="0" y="244" fill="#C8C8C8" font-family="Inter, Arial, sans-serif" font-size="15">projects.</text>
+  </g>
+  <path d="M679 312V681" stroke="#202020"/>
+  <g transform="translate(720 314)">
+    <text x="0" y="14" fill="#fff" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="800">Kaggle Grandmaster</text>
+    <text x="224" y="14" fill="#BDBDBD" font-family="Inter, Arial, sans-serif" font-size="12">Kaggle</text>
+    <text x="0" y="52" fill="#fff" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="800">Legendary Grandmaster</text>
+    <text x="196" y="52" fill="#BDBDBD" font-family="Inter, Arial, sans-serif" font-size="12">Codeforces</text>
+    <text x="0" y="90" fill="#fff" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="800">LeetCode Guardian</text>
+    <text x="205" y="90" fill="#BDBDBD" font-family="Inter, Arial, sans-serif" font-size="12">LeetCode</text>
+    <text x="0" y="128" fill="#fff" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="800">ICPC World Finalist</text>
+    <text x="235" y="128" fill="#BDBDBD" font-family="Inter, Arial, sans-serif" font-size="12">ICPC</text>
+    <text x="0" y="190" fill="#fff" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="800">Top-ranked across platforms</text>
+    <text x="0" y="219" fill="#C8C8C8" font-family="Inter, Arial, sans-serif" font-size="15">Competitive programmers and ML</text>
+    <text x="0" y="242" fill="#C8C8C8" font-family="Inter, Arial, sans-serif" font-size="15">engineers ranked among the best on</text>
+    <text x="0" y="265" fill="#C8C8C8" font-family="Inter, Arial, sans-serif" font-size="15">every major platform.</text>
+  </g>
+  <path d="M1020 312V681" stroke="#202020"/>
+  <g transform="translate(1060 312)">
+    <circle cx="8" cy="8" r="6" fill="#05382B"/>
+    <circle cx="8" cy="8" r="4" fill="#00B987"/>
+    <text x="22" y="12" fill="#00D19A" font-family="JetBrains Mono, monospace" font-size="10">LIVE</text>
+    <text x="0" y="75" fill="#fff" font-family="Inter, Arial, sans-serif" font-size="56" font-weight="300">2,852</text>
+    <text x="140" y="70" fill="#D36A10" font-family="Inter, Arial, sans-serif" font-size="18">*</text>
+    <text x="0" y="110" fill="#7F7F7F" font-family="Inter, Arial, sans-serif" font-size="13">registered contributors</text>
+    <text x="0" y="192" fill="#fff" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="800">A global community</text>
+    <text x="0" y="221" fill="#C8C8C8" font-family="Inter, Arial, sans-serif" font-size="15">Engineers from 40+ countries, architecting</text>
+    <text x="0" y="244" fill="#C8C8C8" font-family="Inter, Arial, sans-serif" font-size="15">and solving the challenges that frontier</text>
+    <text x="0" y="267" fill="#C8C8C8" font-family="Inter, Arial, sans-serif" font-size="15">models can't.</text>
+  </g>
+</svg>

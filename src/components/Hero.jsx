@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { FiCode, FiMail, FiGithub, FiLayout, FiServer } from 'react-icons/fi'
+import gsap from 'gsap'
+import { FiCode, FiMail, FiGithub, FiCpu, FiLayers, FiServer } from 'react-icons/fi'
 import { SITE_DATA } from '../siteData.js'
-import accessBankPreview from '../assets/access-bank-live.png'
-import mixlrPreview from '../assets/mixlr-live.png'
+import moovablePreview from '../assets/moovable-preview.png'
+import igceNetworkPreview from '../assets/igce-network-preview.png'
 
 const CountUp = ({ target, duration = 2000, active }) => {
   const [count, setCount] = useState(0)
@@ -36,10 +37,13 @@ const CountUp = ({ target, duration = 2000, active }) => {
 
 export default function Hero() {
   const [typedRole, setTypedRole] = useState('')
-  const [roleIndex, setRoleIndex] = useState(0)
-  const [isDeleting, setIsDeleting] = useState(false)
+  const [typedCapability, setTypedCapability] = useState('')
+  const [capabilityIndex, setCapabilityIndex] = useState(0)
+  const [isDeletingCapability, setIsDeletingCapability] = useState(false)
+  const [roleComplete, setRoleComplete] = useState(false)
   const [statsInView, setStatsInView] = useState(false)
   const statsRef = useRef(null)
+  const floatingCardsRef = useRef([])
 
   useEffect(() => {
     const el = statsRef.current
@@ -60,30 +64,129 @@ export default function Hero() {
   }, [])
 
   useEffect(() => {
-    const roles = SITE_DATA.roles
-    const currentRole = roles[roleIndex]
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const primaryRole = SITE_DATA.roles[0] || SITE_DATA.title
+
+    if (reduceMotion) {
+      setTypedRole(primaryRole)
+      setRoleComplete(true)
+      return
+    }
+
+    if (roleComplete) return
+
     const timer = setTimeout(() => {
-      if (isDeleting) {
-        setTypedRole(currentRole.substring(0, typedRole.length - 1))
-        if (typedRole === '') {
-          setIsDeleting(false)
-          setRoleIndex((prev) => (prev + 1) % roles.length)
-        }
-      } else {
-        setTypedRole(currentRole.substring(0, typedRole.length + 1))
-        if (typedRole === currentRole) {
-          setTimeout(() => setIsDeleting(true), 2000)
-        }
+      setTypedRole(primaryRole.substring(0, typedRole.length + 1))
+      if (typedRole.length + 1 === primaryRole.length) {
+        setRoleComplete(true)
       }
-    }, isDeleting ? 50 : 100)
+    }, 95)
 
     return () => clearTimeout(timer)
-  }, [typedRole, isDeleting, roleIndex])
+  }, [typedRole, roleComplete])
+
+  useEffect(() => {
+    if (!roleComplete) return
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const capabilities = SITE_DATA.secondaryRoles
+
+    if (reduceMotion) {
+      setTypedCapability(capabilities[0])
+      return
+    }
+
+    const currentCapability = capabilities[capabilityIndex]
+    const timer = setTimeout(() => {
+      if (isDeletingCapability) {
+        const nextValue = currentCapability.substring(0, typedCapability.length - 1)
+        setTypedCapability(nextValue)
+        if (nextValue === '') {
+          setIsDeletingCapability(false)
+          setCapabilityIndex((prev) => (prev + 1) % capabilities.length)
+        }
+      } else {
+        const nextValue = currentCapability.substring(0, typedCapability.length + 1)
+        setTypedCapability(nextValue)
+        if (nextValue === currentCapability) {
+          setTimeout(() => setIsDeletingCapability(true), 1800)
+        }
+      }
+    }, isDeletingCapability ? 45 : 80)
+
+    return () => clearTimeout(timer)
+  }, [typedCapability, capabilityIndex, isDeletingCapability, roleComplete])
+
+  useEffect(() => {
+    const cards = floatingCardsRef.current.filter(Boolean)
+    if (!cards.length) return
+
+    const mm = gsap.matchMedia()
+
+    mm.add('(min-width: 901px) and (prefers-reduced-motion: no-preference)', () => {
+      const entrance = gsap.fromTo(
+        cards,
+        { opacity: 0, y: 16, scale: 0.96 },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.65,
+          ease: 'power2.out',
+          stagger: 0.12,
+          delay: 0.35
+        }
+      )
+
+      const floats = cards.map((card, index) =>
+        gsap.to(card, {
+          y: index === 1 ? -8 : -10,
+          duration: 4.8 + index * 0.45,
+          ease: 'sine.inOut',
+          repeat: -1,
+          yoyo: true,
+          delay: index * 0.35
+        })
+      )
+
+      return () => {
+        entrance.kill()
+        floats.forEach((tween) => tween.kill())
+      }
+    })
+
+    mm.add('(max-width: 900px), (prefers-reduced-motion: reduce)', () => {
+      gsap.set(cards, { clearProps: 'opacity,transform' })
+    })
+
+    return () => mm.revert()
+  }, [])
 
   const floatingCards = [
-    { icon: FiLayout, title: "UI/UX", desc: "Design" },
-    { icon: FiCode, title: "Frontend", desc: "Development" },
-    { icon: FiServer, title: "Backend", desc: "Architecture" }
+    { icon: FiLayers, title: "Frontend Engineering", desc: "Interfaces & Systems" },
+    { icon: FiServer, title: "Full-Stack Systems", desc: "Web & APIs" },
+    { icon: FiCpu, title: "AI-Assisted Engineering", desc: "Agents & Debugging" }
+  ]
+
+  const showcaseProjects = [
+    {
+      title: "Moovable",
+      role: "Frontend Engineer",
+      context: "Logistics Technology Platform",
+      image: moovablePreview,
+      href: "https://getmoovable.com/",
+      external: true,
+      className: "project-1"
+    },
+    {
+      title: "IGCE Network",
+      role: "Full Stack Developer",
+      context: "Telecommunications Platform",
+      image: igceNetworkPreview,
+      href: "https://igecnet.com",
+      external: true,
+      className: "project-2"
+    }
   ]
 
   return (
@@ -103,6 +206,10 @@ export default function Hero() {
               <span className="hero-title">{typedRole}</span>
               <span className="cursor-blink" />
             </div>
+
+            <p className="hero-capability-line" aria-live="polite">
+              {roleComplete ? typedCapability : ''}
+            </p>
 
             <p className="hero-description">
               {SITE_DATA.bio}
@@ -129,56 +236,48 @@ export default function Hero() {
             </div>
 
             <div className="hero-stats" ref={statsRef}>
-              <div className="stat-item">
-                <div className="stat-number">
-                  <CountUp target={SITE_DATA.stats.yearsExperience} active={statsInView} />
-                  <span className="stat-plus">+</span>
+              {SITE_DATA.heroStats.map((item) => (
+                <div className="stat-item" key={item.label}>
+                  <div className="stat-number text-stat">
+                    {item.value === '2+' ? (
+                      <>
+                        <CountUp target={SITE_DATA.stats.yearsExperience} active={statsInView} />
+                        <span className="stat-plus">+</span>
+                      </>
+                    ) : item.value}
+                  </div>
+                  <p className="stat-label">{item.label}</p>
+                  <p className="stat-detail">{item.detail}</p>
                 </div>
-                <p className="stat-label">Years Experience</p>
-              </div>
-              <div className="stat-item">
-                <div className="stat-number">
-                  <CountUp target={SITE_DATA.stats.projectsCompleted} active={statsInView} />
-                  <span className="stat-plus">+</span>
-                </div>
-                <p className="stat-label">Projects Completed</p>
-              </div>
-              <div className="stat-item">
-                <div className="stat-number">
-                  <CountUp target={SITE_DATA.stats.deployedProjects} active={statsInView} />
-                </div>
-                <p className="stat-label">Deployed Projects</p>
-              </div>
+              ))}
             </div>
           </div>
 
           <div className="hero-profile">
             <div className="project-showcase">
-              <a
-                href="https://access-bank-frontend-project.vercel.app"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="project-screenshot project-1"
-                title="View Access Bank Clone"
-              >
-                <img src={accessBankPreview} alt="Access Bank Clone preview - Built by Obaloluwa Kolade Fajinmi" />
-              </a>
-
-              <a
-                href="https://live-coding-mixlr-qxdap1i4j-danielfajinmi01s-projects.vercel.app/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="project-screenshot project-2"
-                title="View Mixlr Clone"
-              >
-                <img src={mixlrPreview} alt="Mixlr Clone preview - Built by Obaloluwa Kolade Fajinmi" />
-              </a>
+              {showcaseProjects.map((project) => (
+                <a
+                  key={project.title}
+                  href={project.href}
+                  target={project.external ? "_blank" : undefined}
+                  rel={project.external ? "noopener noreferrer" : undefined}
+                  className={`project-screenshot ${project.className}`}
+                  title={`${project.title} - ${project.context}`}
+                >
+                  <img src={project.image} alt={`${project.title} preview`} />
+                  <span className="showcase-overlay">
+                    <span className="showcase-title">{project.title}</span>
+                    <span className="showcase-role">{project.role}</span>
+                    <span className="showcase-context">{project.context}</span>
+                  </span>
+                </a>
+              ))}
             </div>
 
             <div className="profile-transparent-wrapper">
               <img
                 src="/obaloluwa fajinmi transperent.png"
-                alt={`${SITE_DATA.name} - Full Stack Developer Portfolio Photo`}
+                alt={`${SITE_DATA.name} - Software Engineer Portfolio Photo`}
                 className="profile-transparent"
               />
             </div>
@@ -191,7 +290,11 @@ export default function Hero() {
               {floatingCards.map((card, idx) => {
                 const Icon = card.icon
                 return (
-                  <div key={idx} className="floating-card">
+                  <div
+                    key={idx}
+                    ref={(el) => (floatingCardsRef.current[idx] = el)}
+                    className="floating-card"
+                  >
                     <div className="floating-card-icon">
                       <Icon size={18} />
                     </div>
